@@ -1,0 +1,62 @@
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: none;
+  background-color: rgba(28, 23, 30, 0.8);
+
+  &__content {
+    position: relative;
+    width: 428px;
+    padding: 64px 64px 32px;
+    background-color: #fff;
+
+  }
+
+  &__header {
+    text-align: center;
+  }
+
+  &__title {
+    margin-bottom: 40px;
+    font-weight: 700;
+    font-size: 28px;
+  }
+
+  &__btn {
+    position: absolute;
+    top: 0;
+    right: -10px;
+    transform: translateX(100%);
+
+    & * {
+      transition: opacity 0.3s ease-in,
+      stroke 0.2s ease-in;
+    }
+
+    &:hover {
+
+      & * {
+         stroke: #fff;
+         opacity: 1;
+      }
+
+    }
+    &_close {
+      width: 16px;
+      height: 16px;
+    }
+
+  }
+
+  &.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.select {
+  width: 100%;
+}

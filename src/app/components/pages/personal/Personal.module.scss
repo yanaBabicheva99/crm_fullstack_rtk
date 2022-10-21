@@ -1,0 +1,31 @@
+.personal_form {
+  padding-top: 53px;
+  width: 792px;
+
+  border-top: 1px solid rgba(43, 56, 68, 0.08);
+
+  &__wrapper {
+    display: flex;
+    column-gap: 32px;
+
+    &_single {
+       width: 380px;
+    }
+  }
+
+  &__btn {
+    width: 158px;
+    padding-top: 19px;
+    padding-bottom: 19px;
+    background-color: #5382E7;
+    border-radius: 3px;
+    color: #fff;
+
+    transition: background-color 0.3s ease-in;
+
+    &:hover {
+      background-color: #2B3844;
+    }
+  }
+
+}

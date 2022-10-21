@@ -1,0 +1,64 @@
+.layout {
+  width: 100%;
+  background-color: #F8F8F8;
+
+  line-height: 1;
+
+  &__wrapper {
+    display: flex;
+  }
+  &__header {
+    padding: 64px 56px 32px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+  }
+
+  &__title {
+    margin-bottom: 8px;
+
+    font-weight: 700;
+    font-size: 36px;
+  }
+
+  &__subtitle {
+    font-weight: 400;
+    font-size: 14px;
+    opacity: 0.7;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 201px;
+    padding: 16px 32px;
+    background-color: #5382E7;
+
+    border-radius: 3px;
+    color: #fff;
+    transition: background-color 0.3s ease-in;
+
+    span {
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    &_add {
+      width: 16px;
+      height: 20px;
+    }
+
+    &:hover {
+      background-color: #2B3844;
+    }
+
+  }
+
+  &__page {
+    padding-left: 56px;
+    padding-right: 56px;
+  }
+}

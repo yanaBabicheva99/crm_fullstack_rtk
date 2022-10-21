@@ -1,0 +1,30 @@
+.statistics {
+  width: 100%;
+  border-top: 1px solid rgba(43, 56, 68, 0.08);
+
+  padding-top: 40px;
+  display: flex;
+  justify-content: space-between;
+
+  &__column {
+
+  }
+
+  &__day {
+     width: 455px;
+     padding: 32px 32px 0;
+     margin-right: 24px;
+     background-color: #fff;
+
+    &:first-child {
+      margin-bottom: 24px;
+    }
+  }
+
+  &__overview {
+     width: 68.5%;
+    padding-top: 32px;
+    background-color: #fff;
+  }
+
+}
