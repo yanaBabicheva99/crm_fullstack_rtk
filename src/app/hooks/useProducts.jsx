@@ -1,6 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {getData} from "../utils/Products";
-import axios from "axios";
 import useAuth from "./useAuth";
 import {ProductService} from "../services/product.service";
 
@@ -32,9 +31,7 @@ export const ProductsProvider = ({children}) => {
 
 
     const deleteProduct = async (id) => {
-        const product = products.find(product => product._id === id);
         const updateProduct = {
-            ...product,
             delete: true
         };
 
@@ -108,7 +105,6 @@ export const ProductsProvider = ({children}) => {
         const oldQuantity = Number(product.quantity);
 
         const updatedProduct = {
-            ...product,
             remains: product.remains - newQuantity || 0,
             quantity: oldQuantity + newQuantity,
             day,

@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const ProductService = {
+
     create: async (content) => {
         const {data} = await axios.post('http://localhost:5000/api/products', content, {
             headers: {
@@ -30,7 +31,7 @@ export const ProductService = {
     },
 
     change: async (id, content) => {
-        const {data} = await axios.patch('http://localhost:5000/api/products/change/' + id, content, {
+        const {data} = await axios.put('http://localhost:5000/api/products/change/' + id, content, {
             headers: {
                 Authorization: JSON.parse(localStorage.getItem('userData')).token
             }

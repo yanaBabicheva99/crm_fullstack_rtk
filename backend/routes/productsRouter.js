@@ -10,7 +10,7 @@ router.patch('/remove/:id', passport.authenticate('jwt', {session: false}), cont
 
 router.post('/', passport.authenticate('jwt', {session: false}), controller.createUserProducts);
 router.patch('/update/:id', passport.authenticate('jwt', {session: false}), controller.updateUserProducts);
-router.patch('/change/:id', passport.authenticate('jwt', {session: false}), controller.changeUserProducts);
+router.put('/change/:id', passport.authenticate('jwt', {session: false}), controller.changeUserProducts);
 
 
 module.exports = router;

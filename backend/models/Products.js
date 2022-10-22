@@ -49,10 +49,6 @@ const productSchema = new Schema({
     delete: {
         type: Boolean,
         default: false
-    },
-    address: {
-        type: String,
-        default: ''
     }
 });
 

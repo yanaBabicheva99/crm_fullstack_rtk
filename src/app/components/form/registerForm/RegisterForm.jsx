@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -9,6 +9,7 @@ import InputForm from '../inputForm/InputForm';
 import style from '../../pages/login/Login.module.scss';
 import styleForm from '../form.module.scss';
 import axios from "axios";
+import {UserService} from "../../../services/user.service";
 
 
 const SignupSchema = Yup.object().shape({
@@ -52,6 +53,7 @@ const SignupSchema = Yup.object().shape({
 
 
 const RegisterForm = () => {
+    const navigate = useNavigate();
     const initialValues = {
         name: '',
         lastName: '',
@@ -61,10 +63,11 @@ const RegisterForm = () => {
         repeatPassword: ''
     };
 
-    const signUp = async (data) => {
+    const signUp = async (content) => {
         try {
-            const tokenInfo = await axios.post('http://localhost:5000/api/auth/register', data);
-            console.log(tokenInfo);
+            const data = await UserService.create(content);
+            console.log(data);
+            navigate('/login');
         } catch(err) {
             console.log(err);
         }

@@ -9,6 +9,7 @@ import style from '../../pages/login/Login.module.scss';
 import styleForm from '../form.module.scss';
 import axios from "axios";
 import {AuthContext} from "../../../context/AuthContext";
+import {UserService} from "../../../services/user.service";
 
 
 const SignupSchema = Yup.object().shape({
@@ -37,7 +38,6 @@ const SignupSchema = Yup.object().shape({
 
 const RegisterForm = () => {
     const auth = useContext(AuthContext);
-    const navigate = useNavigate();
     const initialValues = {
         email: '',
         password: '',
@@ -45,10 +45,9 @@ const RegisterForm = () => {
 
     const logIn = async (content) => {
         try {
-            const {data} = await axios.post('http://localhost:5000/api/auth/login', content);
+            const data = await UserService.get(content);
             console.log(data);
             auth.login(data.token, data.userId);
-             // navigate('/');
         } catch(err) {
             console.log(err);
         }

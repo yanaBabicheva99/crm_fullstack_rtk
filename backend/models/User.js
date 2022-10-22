@@ -22,6 +22,10 @@ const userSchema = new Schema({
     companyName: {
         type: String,
         required: true
+    },
+    address: {
+        type: String,
+        default: ''
     }
 
 });
