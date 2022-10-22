@@ -1,5 +1,5 @@
-import React from 'react';
-import {NavLink} from "react-router-dom";
+import React, {useContext} from 'react';
+import {NavLink, useNavigate} from "react-router-dom";
 
 import {Routes} from "../../constants";
 import {ReactComponent as IconHome } from "../../assets/img/menu/home.svg";
@@ -11,6 +11,7 @@ import logoJustice from '../../assets/img/menu/justice.png';
 import logoCrm from '../../assets/img/menu/crm.svg';
 
 import style from './Menu.module.scss';
+import {AuthContext} from "../../context/AuthContext";
 
 
 
@@ -24,6 +25,13 @@ const nav = [
     {pageName: 'Personal Cabinet', path: Routes.PERSONAL, icon: <IconUser />},
 ]
 const Menu = () => {
+    const {logout} = useContext(AuthContext);
+
+    const handleLogout = (e) => {
+        e.preventDefault();
+        logout();
+
+    }
     return (
         <div className={style.menu}>
             <header className={style.menu__header}>
@@ -47,7 +55,7 @@ const Menu = () => {
                         </NavLink>
                     ))}
             </nav>
-            <NavLink className={style.menu__logo_out} to='/login'>
+            <NavLink onClick={handleLogout} className={style.menu__logo_out} to='/login'>
                     <IconLogo/>
                     <span>Log out</span>
             </NavLink>

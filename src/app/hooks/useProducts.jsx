@@ -1,6 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {getData} from "../utils/Products";
 import axios from "axios";
+import useAuth from "./useAuth";
+import {ProductService} from "../services/product.service";
 
 const ProductsContext = React.createContext();
 
@@ -10,22 +12,23 @@ export const useProducts = () => {
 }
 
 export const ProductsProvider = ({children}) => {
-    const [products, setProducts] = useState();
+    const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const {token} = useAuth();
 
     useEffect(() => {
         const getAllProducts = async () => {
             try {
-                const data = await axios.get('http://localhost:5000/api/products');
+                const data = await ProductService.get();
                 setProducts(data);
                 setLoading(false);
-            } catch(err) {
+
+            } catch (err) {
                 console.log(err);
             }
         }
-        getAllProducts()
+        getAllProducts();
     }, []);
-
 
 
     const deleteProduct = async (id) => {
@@ -34,64 +37,74 @@ export const ProductsProvider = ({children}) => {
             ...product,
             delete: true
         };
+
         try {
-          const data = await axios.patch('http://localhost:5000/api/products/remove/' + id, updateProduct);
-            setProducts(products.map(product => {
+            const data = await ProductService.delete(id, updateProduct);
+
+            setProducts(prevState => prevState.map(product => {
                 if (product._id === data._id) {
                     return data;
                 }
-                return product;
+                return product
             }));
-            
-        } catch(err) {
+
+            return data;
+        } catch (err) {
             console.log(err);
         }
 
     }
 
     const getProducts = () => {
-        return products.filter(product => product.remains !== 0 && !product.delete);
+        return products.length ? products.filter(product => product.remains !== 0 && !product.delete) : [];
     }
 
     const getSoldProducts = () => {
-        return products.filter(product => product.quantity !== '');
+        return  products.length ? products.filter(product => product.quantity): [];
     }
 
-    const addProduct = (data) => {
-        const updatedProducts = [...products,  {
-            id: Date.now(),
-            ...data,
-            // address: '15 Krylatskaya',
+    const addProduct = async (content) => {
+        const product = {
+            ...content,
             creationData: getData(),
-            day: '',
-            lastSale: '',
-            quantity: ''
-        }];
+        }
 
-        localStorage.setItem('products', JSON.stringify(updatedProducts));
-        setProducts(updatedProducts);
+        try {
+            const data = await ProductService.create(product);
+            setProducts(prevState => [...prevState, data]);
+            return data;
+
+        } catch(err) {
+            console.log(err);
+        }
     }
 
-    const changeProduct = (data) => {
-        console.log('change', data);
-        const oldProduct = products.find(product => product.id === data.id);
+    const changeProduct = async (content) => {
+        console.log('change', content);
+        const oldProduct = products.find(product => product._id === content._id);
 
-        const updatedProducts = products.map(product => {
-            if (product.id === data.id) {
-                return {
-                    ...oldProduct,
-                    ...data
-                };
-            }
-            return product;
-        });
+        const changedProduct = {
+            ...oldProduct,
+            ...content
+        };
 
-        localStorage.setItem('products', JSON.stringify(updatedProducts));
-        setProducts(updatedProducts);
+        try {
+            const data = await ProductService.change(content._id, changedProduct);
+            setProducts(prevState => prevState.map(product => {
+                if (product._id === data._id) {
+                    return data;
+                }
+                return product;
+            }));
+            return data;
+        } catch(err) {
+            console.log(err);
+        }
+
     }
 
-    const updateProduct = (id, newQuantity, day) => {
-        const product = products.find(product => product.id === id);
+    const updateProduct = async (id, newQuantity, day) => {
+        const product = products.find(product => product._id === id);
         const oldQuantity = Number(product.quantity);
 
         const updatedProduct = {
@@ -102,15 +115,19 @@ export const ProductsProvider = ({children}) => {
             lastSale: getData()
         };
 
-         const updatedProducts = products.map(product => {
-             if (product.id === id) {
-                 return updatedProduct;
-             }
-             return product;
-         });
+        try {
+            const data = await ProductService.update(id, updatedProduct);
+            setProducts(prevState => prevState.map(product => {
+                if (product._id === data._id) {
+                    return data;
+                }
+                return product;
+            }));
+            return data;
+        } catch(err) {
+            console.log(err);
+        }
 
-        localStorage.setItem('products', JSON.stringify(updatedProducts));
-        setProducts(updatedProducts);
     }
 
     return <ProductsContext.Provider value={

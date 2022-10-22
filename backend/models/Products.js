@@ -44,12 +44,16 @@ const productSchema = new Schema({
     },
     quantity: {
         type: Number,
-        default: ''
+        default: 0
     },
     delete: {
         type: Boolean,
         default: false
     },
+    address: {
+        type: String,
+        default: ''
+    }
 });
 
 module.exports = mongoose.model('products', productSchema);

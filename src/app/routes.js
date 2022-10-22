@@ -95,7 +95,7 @@ export const useRoutes = isAuthenticated => {
                     ))
                 }
                 <Route
-                    path={Routes.MAIN}
+                    path='*'
                     element={<Navigate to={Routes.LOGIN} replace />}
                 />
             </Switch>

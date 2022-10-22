@@ -60,7 +60,7 @@ const AddProductSchema = Yup.object().shape({
         )
 });
 const ProductFormEdit = ({handleVisible, data}) => {
-    const {id, creationData, ...dataProduct} = data;
+    const {_id, creationData, ...dataProduct} = data;
 
     const {changeProduct} = useProducts();
 
@@ -68,7 +68,7 @@ const ProductFormEdit = ({handleVisible, data}) => {
 
     const Edit = (data) => {
         const updateData = {...data, remains: Number(data.remains)}
-        changeProduct({id, ...updateData});
+        changeProduct({_id, ...updateData});
         handleVisible();
     };
     return (

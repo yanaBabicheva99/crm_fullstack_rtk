@@ -18,7 +18,7 @@ const Actions = ({element, handleDelete, onCurrentProduct, onVisibleEdit}) => {
     const handleClickSell = (element) => {
         navigate('/', {
                 state: {
-                    id: element.id,
+                    id: element._id,
                     remains: element.remains
 
             }
@@ -40,7 +40,7 @@ const Actions = ({element, handleDelete, onCurrentProduct, onVisibleEdit}) => {
             </button>
             <button
                 className={style.delete}
-                onClick={() => handleDelete(element.id)}
+                onClick={() => handleDelete(element._id)}
             >
                 <IconDelete />
             </button>

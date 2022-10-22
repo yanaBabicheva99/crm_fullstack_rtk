@@ -27,7 +27,7 @@ const useAuth = () => {
         if (data && data.token) {
             login(data.token, data.userId)
         }
-    }, [login])
+    }, [login]);
 
     return { login, logout, token, userId }
 };

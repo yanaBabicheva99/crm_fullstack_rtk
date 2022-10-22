@@ -15,15 +15,15 @@ function App() {
     return (
         <ModalProvider>
             <AuthContext.Provider value={{
-               token, login, logout, userId, isAuthenticated
+                token, login, logout, userId, isAuthenticated
             }}>
-            <div className="App">
-                <UserProvider>
-                    <ProductsProvider>
-                        {routes}
-                    </ProductsProvider>
-                </UserProvider>
-            </div>
+                <div className="App">
+                    <UserProvider>
+                        <ProductsProvider>
+                            {routes}
+                        </ProductsProvider>
+                    </UserProvider>
+                </div>
             </AuthContext.Provider>
         </ModalProvider>
     );
