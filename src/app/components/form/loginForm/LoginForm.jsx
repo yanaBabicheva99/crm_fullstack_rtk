@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -7,9 +7,8 @@ import * as Yup from 'yup';
 import InputForm from "../inputForm/InputForm";
 import style from '../../pages/login/Login.module.scss';
 import styleForm from '../form.module.scss';
-import axios from "axios";
 import {AuthContext} from "../../../context/AuthContext";
-import {UserService} from "../../../services/user.service";
+
 
 
 const SignupSchema = Yup.object().shape({
@@ -37,21 +36,14 @@ const SignupSchema = Yup.object().shape({
 
 
 const RegisterForm = () => {
-    const auth = useContext(AuthContext);
+    const {signIn} = useContext(AuthContext);
     const initialValues = {
         email: '',
         password: '',
     };
 
-    const logIn = async (content) => {
-        try {
-            const data = await UserService.get(content);
-            console.log(data);
-            auth.login(data.token, data.userId);
-        } catch(err) {
-            console.log(err);
-        }
-
+    const handleSubmit = async (content) => {
+        await signIn(content);
     };
 
     return (
@@ -59,7 +51,7 @@ const RegisterForm = () => {
             <Formik
                 initialValues={initialValues}
                 validationSchema={SignupSchema}
-                onSubmit={logIn}
+                onSubmit={handleSubmit}
             >{({
                    values,
                    errors,

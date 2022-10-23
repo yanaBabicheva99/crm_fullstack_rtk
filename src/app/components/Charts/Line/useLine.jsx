@@ -27,6 +27,8 @@ export const useLine = (arrOptions) => {
         const data = soldProductsToday.map(product => product.quantity * product.price);
         const totalAmount = data.reduce((total, item) => total + item, 0);
         setAmountSoldProducts(data);
+        //[0, ...data] создать новый массив
+        console.log('myData', amountSoldProducts)
     }, [arrOptions]);
 
     const options = {

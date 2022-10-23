@@ -8,8 +8,8 @@ import InputForm from '../inputForm/InputForm';
 
 import style from '../../pages/login/Login.module.scss';
 import styleForm from '../form.module.scss';
-import axios from "axios";
-import {UserService} from "../../../services/user.service";
+import {useContext} from "react";
+import {AuthContext} from "../../../context/AuthContext";
 
 
 const SignupSchema = Yup.object().shape({
@@ -53,7 +53,9 @@ const SignupSchema = Yup.object().shape({
 
 
 const RegisterForm = () => {
-    const navigate = useNavigate();
+    const {signUp} = useContext(AuthContext);
+
+
     const initialValues = {
         name: '',
         lastName: '',
@@ -63,23 +65,16 @@ const RegisterForm = () => {
         repeatPassword: ''
     };
 
-    const signUp = async (content) => {
-        try {
-            const data = await UserService.create(content);
-            console.log(data);
-            navigate('/login');
-        } catch(err) {
-            console.log(err);
-        }
-
-    }
+    const handleSubmit = async (content) => {
+        await signUp(content);
+    };
 
     return (
         <>
             <Formik
                 initialValues={initialValues}
                 validationSchema={SignupSchema}
-                onSubmit={signUp}
+                onSubmit={handleSubmit}
             >{({
                    values,
                    errors,
