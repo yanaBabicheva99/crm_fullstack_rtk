@@ -8,16 +8,17 @@ import style from '../../../style/title/Title.module.scss';
 
 const Products = () => {
     const [currentProduct, setCurrentProduct] = useState(null);
-    const {products, getProducts, deleteProduct, loading} = useProducts();
+    const {products, deleteProduct, loading} = useProducts();
 
-    const [allProducts, setAllProducts] = useState([]);
+    // const [allProducts, setAllProducts] = useState([]);
 
-    useEffect(() => {
-        if (!loading) {
-            setAllProducts(getProducts());
-        }
-    }, [products, loading]);
+    // useEffect(() => {
+    //     if (!loading) {
+    //         setAllProducts(getProducts());
+    //     }
+    // }, [products]);
 
+    const allProducts = products.length ? products.filter(product => product.remains !== 0 && !product.delete) : [];
     const {visible, setVisible} = useModal();
 
     const handleOpen = () => {

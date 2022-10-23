@@ -6,7 +6,6 @@ import {useEffect, useState} from "react";
 
 const Sales = () => {
     const {products, getSoldProducts, loading} = useProducts();
-
     const [soldProducts, setSoldProducts] = useState([]);
 
     useEffect(() => {
@@ -14,18 +13,23 @@ const Sales = () => {
             setSoldProducts(getSoldProducts());
         }
     }, [loading, products]);
-    return (
-      <>
-          {soldProducts.length === 0
-              ? <div className={style.title__wrapper}>
-                  <h2 className={style.title}>Sales not found</h2>
-              </div>
-              : <SalesTable
-                  sellProducts={soldProducts}
-              />
-          }
-      </>
-    );
+
+    if (loading) {
+        return <h2>Loading...</h2>
+    } else {
+        return (
+            <>
+                {soldProducts.length === 0
+                    ? <div className={style.title__wrapper}>
+                        <h2 className={style.title}>Sales not found</h2>
+                    </div>
+                    : <SalesTable
+                        sellProducts={soldProducts}
+                    />
+                }
+            </>
+        )
+    }
 };
 
 export default Sales;

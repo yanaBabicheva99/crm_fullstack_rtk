@@ -1,6 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {getData} from "../utils/Products";
-import useAuth from "./useAuth";
 import {ProductService} from "../services/product.service";
 
 const ProductsContext = React.createContext();
@@ -13,7 +12,6 @@ export const useProducts = () => {
 export const ProductsProvider = ({children}) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
-    const {token} = useAuth();
 
     useEffect(() => {
         const getAllProducts = async () => {

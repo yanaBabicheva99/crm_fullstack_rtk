@@ -5,9 +5,13 @@ import TableBody from "../tableBody/TableBody";
 import {Link} from "react-router-dom";
 import {useUser} from "../../../hooks/useUser";
 
-
 const SalesTable = ({sellProducts}) => {
-    const {user} = useUser();
+    const {user, loading} = useUser();
+
+    if (loading) {
+        return <h2>Loading...</h2>
+    }
+
     const columns = {
         productName: {
             path: 'productName',

@@ -4,6 +4,7 @@ const User = require('../models/User');
 const keys = require('../config/keys');
 const errorHandler = require('../utils/errorHandler');
 
+
 module.exports.login = async function(req, res) {
     const candidate = await User.findOne({email: req.body.email});
     if(candidate) {
@@ -59,6 +60,15 @@ module.exports.register = async function(req, res) {
          }
 
       }
+}
 
-
+module.exports.getUser = async function(req, res) {
+    try {
+        const user = await User.find({
+            user: req.user.id
+        })
+        res.status(200).json(user);
+    } catch(err) {
+        errorHandler(res, err);
+    }
 }

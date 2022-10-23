@@ -29,9 +29,6 @@ module.exports.removeUserProducts = async function(req, res) {
 module.exports.createUserProducts = async function(req, res) {
 
     try {
-        // console.log(req.body);
-        // res.status(200).send({message: 'secc'})
-        console.log(req);
         const product = await new Products({
             store: req.body.store,
             productName: req.body.productName,

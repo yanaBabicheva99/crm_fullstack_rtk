@@ -8,5 +8,14 @@ export const UserService = {
     create: async (content) => {
         const {data} = await axios.post('http://localhost:5000/api/auth/register', content);
         return data;
+    },
+    getUser: async () => {
+        const {data} = await axios.get('http://localhost:5000/api/auth/get', {
+            headers: {
+                Authorization: JSON.parse(localStorage.getItem('userData')).token,
+                "content-type": "application/json"
+            }
+        });
+        return data;
     }
 }
