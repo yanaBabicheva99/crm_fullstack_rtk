@@ -42,20 +42,15 @@ const PersonalSchema = Yup.object().shape({
         ),
 });
 const Personal = () => {
-    // const {user} = useUser();
-    // const initialValues = {oldPassword: '', newPassword: '', ...user};
+    const {user, loading} = useUser();
 
-    const initialValues = {
-        oldPassword: '',
-        newPassword: '',
-        name: '',
-        lastName: '',
-        companyName: '',
-        email: '',
-        address: '',
-    };
-    const {user} = useUser();
-    console.log(user)
+    if (loading) {
+        return <h2>Loading...</h2>
+    }
+
+    const {_id, __v, password, ...data} = user;
+
+    const initialValues = {oldPassword: '', newPassword: '', ...data};
 
     const handleChange = (data) => {
        // changeUserInfo(data);

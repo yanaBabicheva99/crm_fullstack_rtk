@@ -10,14 +10,6 @@ const Products = () => {
     const [currentProduct, setCurrentProduct] = useState(null);
     const {products, deleteProduct, loading} = useProducts();
 
-    // const [allProducts, setAllProducts] = useState([]);
-
-    // useEffect(() => {
-    //     if (!loading) {
-    //         setAllProducts(getProducts());
-    //     }
-    // }, [products]);
-
     const allProducts = products.length ? products.filter(product => product.remains !== 0 && !product.delete) : [];
     const {visible, setVisible} = useModal();
 

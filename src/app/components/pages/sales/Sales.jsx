@@ -2,17 +2,11 @@ import React from 'react';
 import SalesTable from "../../table/salesTable/SalesTable";
 import style from "../../../style/title/Title.module.scss";
 import {useProducts} from "../../../hooks/useProducts";
-import {useEffect, useState} from "react";
 
 const Sales = () => {
-    const {products, getSoldProducts, loading} = useProducts();
-    const [soldProducts, setSoldProducts] = useState([]);
+    const {products, loading} = useProducts();
 
-    useEffect(() => {
-        if (!loading) {
-            setSoldProducts(getSoldProducts());
-        }
-    }, [loading, products]);
+    const soldProducts = products.length ? products.filter(product => product.quantity): [];
 
     if (loading) {
         return <h2>Loading...</h2>

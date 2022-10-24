@@ -9,20 +9,14 @@ import style from './Main.module.scss'
 import {Bar} from "../../Charts/Bar/Bar";
 import {Line} from "../../Charts/Line/Line";
 import {useProducts} from "../../../hooks/useProducts";
-import {useState} from "react";
+
 
 const Main = () => {
    const lacationState = useLocation();
     const {visible, setVisible} = useModal();
-    const {products, getSoldProducts, loading} = useProducts();
+    const {products, loading} = useProducts();
 
-    const [soldProducts, setSoldProducts] = useState([]);
-
-    useEffect(() => {
-        if (!loading) {
-            setSoldProducts(getSoldProducts());
-        }
-    }, [loading, products]);
+    const soldProducts = products.length ? products.filter(product => product.quantity): [];
 
    const {id, remains} = lacationState.state || {id: null, remains: null};
 
@@ -39,6 +33,9 @@ const Main = () => {
         }
     }, []);
 
+    if (loading) {
+        return <h2>Loading...</h2>
+    }
 
     return (<>
             {soldProducts.length !== 0 &&

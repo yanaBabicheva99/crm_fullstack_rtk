@@ -50,14 +50,6 @@ export const ProductsProvider = ({children}) => {
 
     }
 
-    const getProducts = () => {
-        return products.length ? products.filter(product => product.remains !== 0 && !product.delete) : [];
-    }
-
-    const getSoldProducts = () => {
-        return  products.length ? products.filter(product => product.quantity): [];
-    }
-
     const addProduct = async (content) => {
         const product = {
             ...content,
@@ -128,8 +120,6 @@ export const ProductsProvider = ({children}) => {
         {
             products,
             loading,
-            getProducts,
-            getSoldProducts,
             addProduct,
             changeProduct,
             updateProduct,

@@ -66,7 +66,8 @@ module.exports.getUser = async function(req, res) {
     try {
         const user = await User.find({
             user: req.user.id
-        })
+        });
+        // const {password, __v, ...newUser} = user;
         res.status(200).json(user);
     } catch(err) {
         errorHandler(res, err);
