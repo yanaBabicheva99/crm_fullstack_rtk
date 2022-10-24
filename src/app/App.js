@@ -7,25 +7,28 @@ import {ModalProvider} from "./hooks/useModal";
 import UserProvider from "./hooks/useUser";
 import useAuth from "./hooks/useAuth";
 import {AuthContext} from "./context/AuthContext";
+import {ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
     const {token, login, logout, userId, signUp, signIn} = useAuth();
     const isAuthenticated = !!token;
     const routes = useRoutes(isAuthenticated);
     return (
-        <ModalProvider>
-            <AuthContext.Provider value={{
-                token, login, logout, userId, signUp, signIn, isAuthenticated
-            }}>
-                <div className="App">
+        <div className="App">
+            <ModalProvider>
+                <AuthContext.Provider value={{
+                    token, login, logout, userId, signUp, signIn, isAuthenticated
+                }}>
                     <UserProvider>
                         <ProductsProvider>
                             {routes}
                         </ProductsProvider>
                     </UserProvider>
-                </div>
-            </AuthContext.Provider>
-        </ModalProvider>
+                </AuthContext.Provider>
+            </ModalProvider>
+            <ToastContainer position="top-center"/>
+        </div>
     );
 }
 

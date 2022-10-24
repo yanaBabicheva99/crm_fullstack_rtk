@@ -5,6 +5,7 @@ import {Formik} from "formik";
 import InputForm from "../../form/inputForm/InputForm";
 import style from './Personal.module.scss'
 import * as Yup from "yup";
+import {toast} from "react-toastify";
 
 const PersonalSchema = Yup.object().shape({
     name: Yup.string()
@@ -21,9 +22,16 @@ const PersonalSchema = Yup.object().shape({
         .required('Company name is required'),
 
     email: Yup.string().email('Invalid email').required('Email is required'),
-    oldPassword: Yup.string(),
-        // .oneOf([Yup.ref('password'), null], 'Passwords must match'),
+    oldPassword: Yup.string()
+    .matches(
+        /^\S*$/,
+        'The old password is incorrect'
+    ),
     newPassword: Yup.string()
+        .matches(
+            /^\S*$/,
+            'The new password is incorrect'
+        )
         .matches(
             /(?=.*[A-Z])/,
             'The new password must have at least one capital letter'
@@ -42,7 +50,7 @@ const PersonalSchema = Yup.object().shape({
         ),
 });
 const Personal = () => {
-    const {user, loading} = useUser();
+    const {user, loading, updateUserInfo, changeUserInfo} = useUser();
 
     if (loading) {
         return <h2>Loading...</h2>
@@ -52,9 +60,17 @@ const Personal = () => {
 
     const initialValues = {oldPassword: '', newPassword: '', ...data};
 
-    const handleChange = (data) => {
-       // changeUserInfo(data);
-    }
+    const handleChange = async (data) => {
+        if (data.oldPassword && data.newPassword) {
+            changeUserInfo(_id, data).then(res =>  toast.info('Personal data updated')).catch(err => toast.error(err));
+        } else if (!data.oldPassword && data.newPassword || !data.newPassword && data.oldPassword) {
+            toast.error('The password and new password fields must be filled');
+        } else {
+            updateUserInfo(_id, data);
+            toast.info('Personal data updated');
+        }
+    };
+
      return (
          <>
            <Formik

@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {getData} from "../utils/Products";
 import {ProductService} from "../services/product.service";
+import {AuthContext} from "../context/AuthContext";
 
 const ProductsContext = React.createContext();
 
@@ -12,6 +13,7 @@ export const useProducts = () => {
 export const ProductsProvider = ({children}) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const {userId} = useContext(AuthContext);
 
     useEffect(() => {
         const getAllProducts = async () => {
@@ -24,8 +26,14 @@ export const ProductsProvider = ({children}) => {
                 console.log(err);
             }
         }
-        getAllProducts();
-    }, []);
+        if (userId) {
+            getAllProducts();
+        }
+        else if (userId === null) {
+            setProducts([])
+        }
+
+    }, [userId]);
 
 
     const deleteProduct = async (id) => {

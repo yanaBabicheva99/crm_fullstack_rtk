@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {getUserInfo} from "../utils/User";
 import {UserService} from "../services/user.service";
+import {AuthContext} from "../context/AuthContext";
 
 const UserContext = React.createContext();
 
@@ -11,11 +12,12 @@ export const useUser = () => {
 export const UserProvider = ({children}) => {
     const [user, setUser] = useState([]);
     const [loading, setLoading] = useState(true);
+    const {userId} = useContext(AuthContext);
 
     useEffect(() => {
-       const getUser = async () => {
+       const getUser = async (id) => {
            try {
-               const [data] = await UserService.getUser();
+               const [data] = await UserService.getUser(id);
                console.log(data);
                setUser(data);
                setLoading(false);
@@ -23,37 +25,31 @@ export const UserProvider = ({children}) => {
                console.log(err);
            }
        }
-       getUser();
-    }, []);
+       if (userId) {
+           getUser(userId);
+       }
+    }, [userId]);
 
-    // const changeUserInfo = (data) => {
-    //     const {newPassword, oldPassword, ...newData} = data;
-    //
-    //     const userInfo = JSON.parse(localStorage.getItem('user'));
-    //     localStorage.setItem('user', JSON.stringify({...user, ...newData}));
-    //     const usersInfo = JSON.parse(localStorage.getItem('users'));
-    //
-    //    const updateUsersInfo = usersInfo.map(user => {
-    //         if (user.email === userInfo.email) {
-    //             return {
-    //                 ...user,
-    //                 ...newData
-    //             }
-    //         }
-    //         return user;
-    //     })
-    //
-    //     localStorage.setItem('users', JSON.stringify(updateUsersInfo));
-    //
-    //     setUser(prevState => (
-    //         {
-    //             ...prevState,
-    //             ...newData
-    //         }
-    //     ))
-    // }
+    const updateUserInfo = async (id, content) => {
+        try {
+            const data = await UserService.updateUser(id, content);
+            setUser(prevState => ({...prevState, ...data}));
+        } catch(err) {
+            console.log(err);
+        }
+    };
 
-    return <UserContext.Provider value={{user, loading}}>
+    const changeUserInfo = async (id, content) => {
+        try {
+            const data = await UserService.changeUser(id, content);
+            setUser(prevState => ({...prevState, ...data}));
+        } catch(err) {
+            const {response: {data: {message}}} = err;
+            return Promise.reject(message);
+        }
+    };
+
+    return <UserContext.Provider value={{user, loading, updateUserInfo, changeUserInfo}}>
         {children}
     </UserContext.Provider>
 };

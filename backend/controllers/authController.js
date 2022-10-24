@@ -22,13 +22,13 @@ module.exports.login = async function(req, res) {
 
         } else {
             res.status(401).json({
-                message: 'Пароли не совпадают. Попробуйте снова'
+                message: 'Passwords dont match. Try again'
             })
         }
 
     } else {
         res.status(404).json({
-            message: 'Пользователь с таким email не найден'
+            message: 'User with this email not found'
         })
     }
 
@@ -40,7 +40,7 @@ module.exports.register = async function(req, res) {
 
       if(candidate) {
           res.status(409).json({
-             message: 'Такой email уже существует'
+             message: 'This email already exists'
           })
       } else {
          const salt = bcrypt.genSaltSync(10)
@@ -65,11 +65,65 @@ module.exports.register = async function(req, res) {
 module.exports.getUser = async function(req, res) {
     try {
         const user = await User.find({
-            user: req.user.id
+            _id:req.params.id
         });
-        // const {password, __v, ...newUser} = user;
+        console.log(user);
         res.status(200).json(user);
     } catch(err) {
         errorHandler(res, err);
     }
 }
+
+// module.exports.getUser = async function(req, res) {
+//     try {
+//         const user = await User.find({
+//             user: req.user.id
+//         });
+//         console.log(user);
+//         res.status(200).json(user);
+//     } catch(err) {
+//         errorHandler(res, err);
+//     }
+// }
+
+module.exports.updateUser = async function(req, res) {
+    try {
+        const user = await User.findOneAndUpdate(
+            {_id:req.params.id},
+            {$set: req.body},
+            {new: true}
+        )
+        res.status(200).json(user)
+    } catch(err) {
+        errorHandler(res, err);
+    }
+}
+
+module.exports.changeUser = async function(req, res) {
+    try {
+        const user = await User.findOne({_id: req.params.id});
+        const passwordResult = bcrypt.compareSync(req.body.oldPassword, user.password);
+        if (passwordResult) {
+            const salt = bcrypt.genSaltSync(10);
+
+            const {oldPassword, newPassword, ...updateData} = req.body;
+            const newData = {...updateData, password: bcrypt.hashSync(req.body.newPassword, salt)}
+
+            const updateUser = await User.updateOne(
+                {_id: req.params.id},
+              {$set: newData},
+              {new: true}
+            )
+            res.status(200).json(updateUser)
+        }
+
+        else {
+            res.status(401).json({
+                message: 'Пароли не совпадают. Попробуйте снова'
+            })
+        }
+    } catch(err) {
+        errorHandler(res, err);
+    }
+}
+

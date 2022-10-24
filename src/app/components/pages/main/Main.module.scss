@@ -22,7 +22,8 @@
   }
 
   &__overview {
-     width: 68.5%;
+    width: 68.5%;
+    //height: calc(100vh - (195px + 136px));
     padding-top: 32px;
     background-color: #fff;
   }
