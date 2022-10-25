@@ -31,6 +31,7 @@ export const usePie = (arrOptions) => {
         title: {
             text: 'Sales schedule by day',
             left: 'left',
+            top: '0px',
             color: '#2B3844',
             textStyle: {
                 fontSize: 18,
@@ -46,9 +47,9 @@ export const usePie = (arrOptions) => {
             top: '23%',
             orient: 'vertical',
             itemWidth: 10,
-            right: '25%',
+            right: '15%',
             itemGap: 33,
-            color: '#2B3844',
+            color: '#2B3844'
         },
         series: [
             {
@@ -56,7 +57,8 @@ export const usePie = (arrOptions) => {
                 type: 'pie',
                 radius: ['0%', '70%'],
                 left: -20,
-                bottom: 50,
+                bottom: 0,
+                top: 10,
                 width: 250,
                 avoidLabelOverlap: false,
                 label: {

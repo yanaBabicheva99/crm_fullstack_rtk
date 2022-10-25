@@ -34,6 +34,7 @@ export const useLine = (arrOptions) => {
             text: 'Total earned',
             left: 'left',
             color: '#2B3844',
+            top: '0px',
             textStyle: {
                 fontSize: 18,
                 fontWeight: "bold",

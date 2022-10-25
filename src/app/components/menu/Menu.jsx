@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {NavLink, useNavigate} from "react-router-dom";
 
 import {Routes} from "../../constants";
@@ -24,7 +24,7 @@ const nav = [
     {pageName: 'My sales', path: Routes.SALES, icon: <IconSales />},
     {pageName: 'Personal Cabinet', path: Routes.PERSONAL, icon: <IconUser />},
 ]
-const Menu = () => {
+const Menu = ({open}) => {
     const {logout} = useContext(AuthContext);
 
     const handleLogout = (e) => {
@@ -32,8 +32,10 @@ const Menu = () => {
         logout();
 
     }
+
     return (
-        <div className={style.menu}>
+        <>
+        <div className={open ? [style.menu, style.active].join(' '): style.menu}>
             <header className={style.menu__header}>
                 <div className={style.menu__header_logo}>
                     <img src={logoJustice} alt="JUSTICE logo"/>
@@ -60,6 +62,7 @@ const Menu = () => {
                     <span>Log out</span>
             </NavLink>
         </div>
+        </>
     );
 };
 
