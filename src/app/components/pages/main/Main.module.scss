@@ -8,6 +8,8 @@
   justify-content: space-between;
 
   @media (max-width: 899px) {
+    padding-top: 25px;
+    padding-bottom: 25px;
     flex-direction: column;
     align-items: center;
 
@@ -15,6 +17,7 @@
 
   &__column {
     @media (max-width: 899px) {
+      height: 500px;
       margin-bottom: 20px;
     }
   }
@@ -33,12 +36,19 @@
     div {
       width: 324px;
       height: 100% !important;
+      
+      @media (max-width: 899px) {
+        width: 347px;
+      }
     }
 
     @media (max-width: 1199px) {
       width: 365px;
     }
     @media (max-width: 899px) {
+      width: 536px;
+      display: flex;
+      justify-content: center;
       margin-right: 0;
     }
   }
