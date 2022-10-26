@@ -9,11 +9,11 @@ import {ReactComponent as IconBtn} from '../../assets/img/layout/btn.svg';
 import style from './Layout.module.scss';
 import {useModal} from "../../hooks/useModal";
 import Burger from "../Burger";
-import {useMediaQuery} from "@mui/material";
+import {useMediaQuery, Drawer} from "@mui/material";
 
 
 const Layout = ({children, title, subtitle}) => {
-    const isMobile = useMediaQuery('(max-width:899px)');
+    const isMobile = useMediaQuery('(max-width:599px)');
 
     console.log(isMobile)
 
@@ -54,14 +54,28 @@ const Layout = ({children, title, subtitle}) => {
                     {children}
                 </section>
             </div>
-            <Modal
-                visible={visible.create}
-                handleVisible={handleClose}
-            >
-                <ProductFormAdd
-                    handleVisible={handleClose}
-                />
-            </Modal>
+            <>
+                {
+                    isMobile
+                    ?  <Drawer
+                            open={visible.create}
+                            onClose={handleClose}
+                        >
+                            <ProductFormAdd
+                                handleVisible={handleClose}
+                            />
+                        </Drawer>
+
+                    :      <Modal
+                            visible={visible.create}
+                            handleVisible={handleClose}
+                        >
+                            <ProductFormAdd
+                                handleVisible={handleClose}
+                            />
+                        </Modal>
+                }
+            </>
         </div>
     );
 };

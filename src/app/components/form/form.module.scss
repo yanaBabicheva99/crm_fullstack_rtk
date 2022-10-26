@@ -1,6 +1,12 @@
 .form {
   margin-bottom: 32px;
 
+  @media (max-width: 599px) {
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-bottom: 25px;
+  }
+
   &__wrapper {
     display: flex;
     column-gap: 16px;
@@ -16,10 +22,18 @@
 
     color: #fff;
     font-weight: 500;
+    
+    @media (max-width: 599px) {
+
+    }
 
     &.add {
       margin-top: 32px;
       font-size: 14px;
+      
+      @media (max-width: 599px) {
+        font-size: 12px;
+      }
     }
   }
 

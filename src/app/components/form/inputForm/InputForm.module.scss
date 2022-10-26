@@ -20,6 +20,14 @@
     width: 100%;
     margin-bottom: 24px;
     font-size: 12px;
+
+    @media (max-width: 1199px) {
+      font-size: 14px;
+    }
+    
+    @media (max-width: 599px) {
+      margin-bottom: 16px;
+    }
   }
 
   &__label {
@@ -35,6 +43,10 @@
       font-size: 12px;
       font-weight: inherit;
       text-align: left;
+
+      @media (max-width: 599px) {
+        font-size: 11px;
+      }
     }
   }
 

@@ -13,16 +13,44 @@
     padding: 64px 64px 32px;
     background-color: #fff;
 
+    @media (max-width: 1199px) {
+      height: 80vh;
+      overflow-y: auto;
+      padding-top: 32px;
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+
+    &_wrapper {
+      height: 90vh;
+      padding: 40px;
+      overflow-y: auto;
+
+      @media (max-width: 1199px) {
+        height: auto;
+        padding: 0;
+      }
+    }
+
   }
 
   &__header {
     text-align: center;
+
+    @media (max-width: 599px) {
+      padding-top: 25px;
+    }
   }
 
   &__title {
     margin-bottom: 40px;
     font-weight: 700;
     font-size: 28px;
+
+    @media (max-width: 599px) {
+      font-size: 18px;
+      margin-bottom: 26px;
+    }
   }
 
   &__btn {
@@ -30,6 +58,10 @@
     top: 0;
     right: -10px;
     transform: translateX(100%);
+
+    @media (max-width: 1199px) {
+      display: none;
+    }
 
     & * {
       transition: opacity 0.3s ease-in,

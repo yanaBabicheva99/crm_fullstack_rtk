@@ -10,17 +10,19 @@ const Modal = ({children, visible, handleVisible}) => {
     };
 
     return (
-        <div className={rootClasses()} onClick={handleVisible}>
-            <div className={style.modal__content} onClick={(e) => e.stopPropagation()}>
+            <div className={rootClasses()} onClick={handleVisible}>
+                <div className={style.modal__content_wrapper}>
+                <div className={style.modal__content} onClick={(e) => e.stopPropagation()}>
                     {children}
-                <button
-                    className={style.modal__btn}
-                    onClick={handleVisible}
-                >
-                    <IconClose className={style.modal__btn_close}/>
-                </button>
+                    <button
+                        className={style.modal__btn}
+                        onClick={handleVisible}
+                    >
+                        <IconClose className={style.modal__btn_close}/>
+                    </button>
+                </div>
+                </div>
             </div>
-        </div>
     );
 };
 export default Modal;
