@@ -5,6 +5,7 @@ import TableHeader from "../tableHeader/TableHeader";
 import TableBody from "../tableBody/TableBody";
 import {useUser} from "../../../hooks/useUser";
 import {Link} from "react-router-dom";
+import styleBox from '../Table.module.scss';
 
 const ProductsTable = ({products, handleDelete, onCurrentProduct, onVisibleEdit}) => {
     const {user, loading} = useUser();
@@ -64,10 +65,14 @@ const ProductsTable = ({products, handleDelete, onCurrentProduct, onVisibleEdit}
         }
     }
     return(
-        <table>
-            <TableHeader columns={columns}/>
-            <TableBody columns={columns} items={products}/>
-        </table>
+        <div className={styleBox.box__wrapper}>
+            <div className={styleBox.box}>
+                <table>
+                    <TableHeader columns={columns}/>
+                    <TableBody columns={columns} items={products}/>
+                </table>
+            </div>
+        </div>
     );
 };
 

@@ -9,6 +9,8 @@ import style from './Main.module.scss'
 import {Bar} from "../../Charts/Bar/Bar";
 import {Line} from "../../Charts/Line/Line";
 import {useProducts} from "../../../hooks/useProducts";
+import {Drawer, useMediaQuery} from "@mui/material";
+import ProductFormEdit from "../../form/productForm/ProductFormEdit";
 
 
 const Main = () => {
@@ -19,6 +21,7 @@ const Main = () => {
     const soldProducts = products.length ? products.filter(product => product.quantity): [];
 
    const {id, remains} = lacationState.state || {id: null, remains: null};
+    const isMobile = useMediaQuery('(max-width:599px)');
 
     const handleOpen = () => {
         setVisible({sell: true});
@@ -49,17 +52,33 @@ const Main = () => {
                     </div>
                 </div>
             }
-                <Modal
-                    visible={visible.sell}
-                    handleVisible={handleClose}
-                >
-                    {id !== null && (
-                    <SellForm
-                        id={id}
-                        quantity={remains}
+            {
+                id !== null && isMobile
+                ?    <Drawer
+                        anchor='bottom'
+                        open={visible.sell}
+                        onClose={handleClose}
+                    >
+                        <SellForm
+                            id={id}
+                            quantity={remains}
+                            handleVisible={handleClose}
+                        />
+                    </Drawer>
+
+                : id !== null && (
+                    <Modal
+                        sell={true}
+                        visible={visible.sell}
                         handleVisible={handleClose}
-                    />)}
-                </Modal>
+                    >
+                            <SellForm
+                                id={id}
+                                quantity={remains}
+                                handleVisible={handleClose}
+                            />
+                    </Modal>)
+            }
         </>
     );
 };

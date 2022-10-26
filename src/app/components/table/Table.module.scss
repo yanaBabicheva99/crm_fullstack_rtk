@@ -8,6 +8,10 @@ table {
   border-spacing: 0;
   border-radius: 3px;
   color: white;
+
+  @media (max-width: 1199px) {
+    width: 1043px;
+  }
 }
 
 tbody:before {
@@ -21,7 +25,9 @@ th {
   padding-bottom: 20px;
   background-color: #2B3844;
 }
-
+//th, td {
+//  white-space: nowrap;
+//}
 td {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -53,3 +59,27 @@ tr:nth-child(even) {
   background: transparent;
 }
 
+.box {
+  @media (max-width: 1199px) {
+    max-width: 1043px;
+  }
+
+  @media (max-width: 1199px) {
+    overflow-x: scroll;
+  }
+
+  &__wrapper {
+    @media (max-width: 1199px) {
+      height: calc(100vh - 119px);
+    }
+
+    @media (max-width: 899px) {
+      height: calc(100vh - 111px);
+    }
+
+    @media (max-width: 599px) {
+      height: calc(100vh - 79px);
+    }
+
+  }
+}

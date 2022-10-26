@@ -22,9 +22,10 @@
     }
 
     &_wrapper {
-      height: 90vh;
+      height: 95vh;
       padding: 40px;
       overflow-y: auto;
+      overflow-x: hidden;
 
       @media (max-width: 1199px) {
         height: auto;
@@ -33,6 +34,14 @@
     }
 
   }
+
+  &__content_sell {
+    position: relative;
+    width: 428px;
+    padding: 64px 64px 32px;
+    background-color: #fff;
+  }
+
 
   &__header {
     text-align: center;
@@ -58,6 +67,12 @@
     top: 0;
     right: -10px;
     transform: translateX(100%);
+
+    &.sell {
+      @media (max-width: 1199px) {
+        display: block;
+      }
+    }
 
     @media (max-width: 1199px) {
       display: none;

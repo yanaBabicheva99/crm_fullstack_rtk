@@ -4,6 +4,7 @@ import TableHeader from "../tableHeader/TableHeader";
 import TableBody from "../tableBody/TableBody";
 import {Link} from "react-router-dom";
 import {useUser} from "../../../hooks/useUser";
+import styleBox from "../Table.module.scss";
 
 const SalesTable = ({sellProducts}) => {
     const {user, loading} = useUser();
@@ -54,10 +55,14 @@ const SalesTable = ({sellProducts}) => {
         },
     }
     return(
-        <table>
-            <TableHeader columns={columns} />
-            <TableBody columns={columns} items={sellProducts}/>
-        </table>
+        <div className={styleBox.box__wrapper}>
+            <div className={styleBox.box}>
+                <table>
+                    <TableHeader columns={columns}/>
+                    <TableBody columns={columns} items={sellProducts}/>
+                </table>
+            </div>
+        </div>
     );
 };
 

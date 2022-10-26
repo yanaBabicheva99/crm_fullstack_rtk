@@ -5,6 +5,7 @@ import Modal from "../../modal/Modal";
 import ProductFormEdit from "../../form/productForm/ProductFormEdit";
 import {useModal} from "../../../hooks/useModal";
 import style from '../../../style/title/Title.module.scss';
+import {Drawer, useMediaQuery} from "@mui/material";
 
 const Products = () => {
     const [currentProduct, setCurrentProduct] = useState(null);
@@ -12,6 +13,7 @@ const Products = () => {
 
     const allProducts = products.length ? products.filter(product => product.remains !== 0 && !product.delete) : [];
     const {visible, setVisible} = useModal();
+    const isMobile = useMediaQuery('(max-width:599px)');
 
     const handleOpen = () => {
         setVisible({edit: true});
@@ -44,17 +46,29 @@ const Products = () => {
                            onCurrentProduct={handleCurrentProduct}
                            onVisibleEdit={handleOpen}
                        />
-                       <Modal
-                           visible={visible.edit}
-                           handleVisible={handleClose}
-                       >
-                           {currentProduct && (
-                               <ProductFormEdit
-                                   data={currentProduct}
+                       {
+                           isMobile
+                           ? <Drawer
+                                   open={visible.edit}
+                                   onClose={handleClose}
+                               >
+                                       <ProductFormEdit
+                                           data={currentProduct}
+                                           handleVisible={handleClose}
+                                       />
+                               </Drawer>
+                           :   <Modal
+                                   visible={visible.edit}
                                    handleVisible={handleClose}
-                               />)
-                           }
-                       </Modal>
+                               >
+                                   {currentProduct && (
+                                       <ProductFormEdit
+                                           data={currentProduct}
+                                           handleVisible={handleClose}
+                                       />)
+                                   }
+                               </Modal>
+                       }
                    </>
                }
            </>

@@ -4,18 +4,20 @@ import {ReactComponent as IconClose} from '../../assets/img/action/delete.svg';
 
 import style from './Modal.module.scss';
 
-const Modal = ({children, visible, handleVisible}) => {
+const Modal = ({children, visible, handleVisible, sell= false}) => {
     const rootClasses = () => {
         return visible ? [style.modal, style.active].join(' ') : style.modal;
     };
 
     return (
             <div className={rootClasses()} onClick={handleVisible}>
-                <div className={style.modal__content_wrapper}>
-                <div className={style.modal__content} onClick={(e) => e.stopPropagation()}>
+                <div className={!sell ? style.modal__content_wrapper : ''}>
+                <div className={!sell ? style.modal__content: style.modal__content_sell}
+                     onClick={(e) => e.stopPropagation()}
+                >
                     {children}
                     <button
-                        className={style.modal__btn}
+                        className={!sell ? style.modal__btn : [style.modal__btn, style.sell].join(' ')}
                         onClick={handleVisible}
                     >
                         <IconClose className={style.modal__btn_close}/>
