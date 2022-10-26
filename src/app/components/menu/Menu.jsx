@@ -35,6 +35,7 @@ const Menu = ({open}) => {
 
     return (
         <>
+            <div className={open ? [style.menu__bg, style.active_bg].join(' ') : style.menu__bg}></div>
         <div className={open ? [style.menu, style.active].join(' '): style.menu}>
             <header className={style.menu__header}>
                 <div className={style.menu__header_logo}>

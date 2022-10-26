@@ -9,9 +9,14 @@ import {ReactComponent as IconBtn} from '../../assets/img/layout/btn.svg';
 import style from './Layout.module.scss';
 import {useModal} from "../../hooks/useModal";
 import Burger from "../Burger";
+import {useMediaQuery} from "@mui/material";
 
 
 const Layout = ({children, title, subtitle}) => {
+    const isMobile = useMediaQuery('(max-width:899px)');
+
+    console.log(isMobile)
+
    const {visible, setVisible} = useModal();
    const [openBurger, setOpenBurger] = useState(false);
 

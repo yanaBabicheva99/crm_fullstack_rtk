@@ -132,4 +132,23 @@
       color: #5382E7;
     }
   }
+
+  &__bg {
+    @media (max-width: 1024px) {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      display: none;
+      background-color: rgba(28, 23, 30, 0.8);
+      z-index: 10;
+    }
+
+    &.active_bg {
+      @media (max-width: 1024px) {
+        display: block;
+      }
+    }
+  }
 }
