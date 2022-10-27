@@ -11,6 +11,10 @@
   font-size: 14px;
   outline-color: #5382E7;
 
+  @media (max-width: 599px) {
+    font-size: 12px;
+  }
+
   &::placeholder {
     color: #2B3844;
     opacity: 0.3;
@@ -24,9 +28,14 @@
     @media (max-width: 1199px) {
       font-size: 14px;
     }
+
+    @media (max-width: 899px) {
+      width: 100%;
+    }
     
     @media (max-width: 599px) {
       margin-bottom: 16px;
+      font-size: 12px;
     }
   }
 

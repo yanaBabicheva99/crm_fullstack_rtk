@@ -1,5 +1,4 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {getUserInfo} from "../utils/User";
 import {UserService} from "../services/user.service";
 import {AuthContext} from "../context/AuthContext";
 

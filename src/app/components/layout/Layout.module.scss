@@ -20,11 +20,14 @@
 
   &.active {
     @media (max-width: 1199px) {
-      padding-left: 0;
+      padding-left: 27px;
     }
 
-    @media (max-width: 1024px) {
+    @media (max-width: 899px) {
       padding-left: 20px;
+    }
+    @media (max-width: 599px) {
+      padding-left: 10px;
     }
   }
 
@@ -141,7 +144,8 @@
   }
 
   &__page {
-    height: calc(100% - (18.7% + 11.2%));
+    //height: calc(100% - (18.7% + 11.2%));
+    height: calc(100% - (18.7% + 5%));
     padding-left: 56px;
     padding-right: 56px;
 

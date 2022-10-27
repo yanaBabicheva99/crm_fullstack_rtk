@@ -1,0 +1,35 @@
+
+.pagination {
+  display: flex;
+  column-gap: 6px;
+
+  &__item {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+
+    background-color: #5382E7;
+    color: #fff;
+
+    cursor: pointer;
+
+  }
+
+  &__wrapper {
+    padding-top: 25px;
+    display: flex;
+    justify-content: center;
+
+    @media (max-width: 899px) {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translate(-50%, -100%);
+    }
+
+  }
+
+}

@@ -1,0 +1,25 @@
+import React from 'react';
+import _ from 'lodash';
+
+import style from './Pagination.module.scss';
+
+const Pagination = ({itemsCount, currentPage, onPageChange, pageSize}) => {
+    const pageCount = Math.ceil(itemsCount / pageSize);
+    if (pageCount === 1) return null;
+    const pages = _.range(1, pageCount + 1);
+    return (
+        <div className={style.pagination__wrapper}>
+            <ul className={style.pagination}>
+                {pages.map(page => (
+                    <li
+                        key={page}
+                        className={style.pagination__item}
+                        onClick={() => onPageChange(page)}
+                    >{page}</li>
+                ))}
+            </ul>
+        </div>
+    );
+};
+
+export default Pagination;

@@ -12,14 +12,6 @@ export const getData = () => {
     return day + '.' + month + '.' + year;
 };
 
-// export const getPrice = (price) => {
-//     const newPrice = String(price);
-//     if (newPrice.length === 1 || newPrice.length === 2 || newPrice.length === 3) {
-//         return  '$' + newPrice;
-//     }
-//     return '$' + newPrice[0] + ' ' + newPrice.slice(1);
-// };
-
 export const getWeight = (weight) => {
     return weight + 'kg'
 };
@@ -51,14 +43,4 @@ export function getPrice(amount) {
         return  '$' + price
     }
 }
-
-
-const products = [];
-export const getProductsStorage = () => {
-    if (!localStorage.getItem('products')) {
-        localStorage.setItem('products', JSON.stringify(products))
-    }
-    return JSON.parse(localStorage.getItem('products'));
-}
-
 

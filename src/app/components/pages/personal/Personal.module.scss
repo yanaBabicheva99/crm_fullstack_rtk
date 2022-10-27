@@ -4,12 +4,39 @@
 
   border-top: 1px solid rgba(43, 56, 68, 0.08);
 
+  @media (max-width: 1199px) {
+    height: calc(100vh - 119px);
+    width: 100%;
+  }
+
+  @media (max-width: 899px) {
+    height: calc(100vh - 111px);
+  }
+
+  @media (max-width: 599px) {
+    padding-top: 30px;
+    padding-bottom: 20px;
+    height: auto;
+  }
+
   &__wrapper {
     display: flex;
     column-gap: 32px;
 
+    @media (max-width: 599px) {
+      display: block;
+    }
+
     &_single {
        width: 380px;
+
+      @media (max-width: 1199px) {
+        width: 48%;
+      }
+
+      @media (max-width: 599px) {
+        width: 100%;
+      }
     }
   }
 
@@ -22,7 +49,14 @@
     color: #fff;
 
     transition: background-color 0.3s ease-in;
-
+    
+    @media (max-width: 599px) {
+      width: 136px;
+      padding-top: 16px;
+      padding-bottom: 16px;
+      font-size: 15px;
+    }
+    
     &:hover {
       background-color: #2B3844;
     }

@@ -10,6 +10,7 @@ import Personal from "./components/pages/personal/Personal";
 import Login from "./components/pages/login/Login";
 import LoginForm from "./components/form/loginForm/LoginForm";
 import RegisterForm from "./components/form/registerForm/RegisterForm";
+import LayoutLogin from "./components/layout/LayoutLogin";
 
 export const useRoutes = isAuthenticated => {
 
@@ -88,9 +89,11 @@ export const useRoutes = isAuthenticated => {
                             key={item.title}
                             path={item.path}
                             element={
+                            <LayoutLogin>
                                 <Login title={item.title}>
                                     {item.component}
                                 </Login>
+                            </LayoutLogin>
                             }/>
                     ))
                 }
