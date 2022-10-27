@@ -70,18 +70,12 @@ const ProductFormAdd = ({handleVisible}) => {
         weight: ''
     };
 
-    const add = (data) => {
+    const add = (data,  { resetForm }) => {
         const updateData = {...data, remains: Number(data.remains)}
         addProduct(updateData);
         handleVisible();
+        resetForm();
     };
-
-    // const clearForm = () => {
-    //     resetForm({values: ''})
-    // }
-
-
-
 
     return (
         <>

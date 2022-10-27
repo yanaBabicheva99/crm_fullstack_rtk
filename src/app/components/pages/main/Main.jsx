@@ -11,11 +11,13 @@ import { Line } from '../../Charts/Line/Line';
 import { useProducts } from '../../../hooks/useProducts';
 import { Drawer, useMediaQuery } from '@mui/material';
 import styleTitle from '../../../style/title/Title.module.scss'
+import { usePie } from '../../Charts/Pie/usePie';
 
 const Main = () => {
   const lacationState = useLocation();
   const { visible, setVisible } = useModal();
   const { products, loading } = useProducts();
+
 
   const soldProducts = products.length ? products.filter(product => product.quantity) : [];
 

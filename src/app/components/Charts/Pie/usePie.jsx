@@ -48,7 +48,7 @@ export const usePie = (arrOptions) => {
             orient: 'vertical',
             itemWidth: 10,
             right: '15%',
-            itemGap: 33,
+            itemGap: 15,
             color: '#2B3844'
         },
         series: [
