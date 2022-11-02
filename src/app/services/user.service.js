@@ -27,13 +27,11 @@ export const UserService = {
         return data;
     },
     changeUser: async (id, content) => {
-        console.log('213213')
         const {data} = await axios.put('http://localhost:5000/api/auth/change/' + id, content, {
             headers: {
                 Authorization: JSON.parse(localStorage.getItem('userData')).token
             }
         });
-        console.log('213213 = ',data)
         return data;
     }
 }

@@ -151,7 +151,7 @@ const RegisterForm = () => {
                 </form>
             )}
             </Formik>
-            <p>Already have an account ?
+            <p className={style.login__link_text}>Already have an account ?
                 <Link className={style.login__link} to='/login'> Log in</Link>
             </p>
         </>

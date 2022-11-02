@@ -22,7 +22,7 @@ const Products = () => {
     const isMobile = useMediaQuery('(max-width:599px)');
     const isTablet = useMediaQuery('(max-width:1199px)');
 
-    const pageSize = isTablet ? 5 : 7;
+    const pageSize = isTablet ? 5 : 6;
 
 
     const handlePageChange = (page) => {

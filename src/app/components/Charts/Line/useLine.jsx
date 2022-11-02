@@ -1,24 +1,15 @@
 import {useEffect, useState} from "react";
+import { getData } from '../../../utils/Products';
 
 
 export const useLine = (arrOptions) => {
 
-    const day = String(new Date().getDay());
-
-    const days = {
-        '1': 'Mon',
-        '2': 'Tue',
-        '3': 'Wed',
-        '4': 'Thu',
-        '5': 'Fri',
-        '6': 'Sat',
-        '0': 'Sun'
-    };
+    const dayNow = getData();
 
     const [amountSoldProducts, setAmountSoldProducts] = useState([]);
 
     useEffect(() => {
-        const soldProductsToday = arrOptions.filter(product => product.day === days[day]);
+        const soldProductsToday = arrOptions.filter(product => product.lastSale === dayNow);
 
         if (soldProductsToday.length === 0) {
             return;

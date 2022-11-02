@@ -14,7 +14,6 @@ import LayoutLogin from "./components/layout/LayoutLogin";
 
 export const useRoutes = isAuthenticated => {
 
-    console.log(isAuthenticated);
     const pages = [
         {
             title: 'Sales statistics',

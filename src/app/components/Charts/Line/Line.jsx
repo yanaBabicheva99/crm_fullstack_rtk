@@ -11,7 +11,7 @@ export const Line = ({arrOptions}) => {
         <>
             {amountSoldProducts.length !== 0 && (
                 <div className={style.statistics__day}>
-                    <ReactECharts option={options}/>
+                    <ReactECharts option={options} />
                 </div>)
             }
         </>

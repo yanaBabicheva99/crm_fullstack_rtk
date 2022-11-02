@@ -15,8 +15,6 @@ import {useMediaQuery, Drawer} from "@mui/material";
 const Layout = ({children, title, subtitle}) => {
     const isMobile = useMediaQuery('(max-width:599px)');
 
-    console.log(isMobile)
-
    const {visible, setVisible} = useModal();
    const [openBurger, setOpenBurger] = useState(false);
 

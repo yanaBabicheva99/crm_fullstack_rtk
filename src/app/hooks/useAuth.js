@@ -29,7 +29,6 @@ const useAuth = () => {
     const signUp = async (content) => {
         try {
             const data = await UserService.create(content);
-            console.log(data);
             navigate('/login');
         } catch(err) {
             const {response: {data: {message}}} = err;

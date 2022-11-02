@@ -75,7 +75,6 @@ export const ProductsProvider = ({children}) => {
     }
 
     const changeProduct = async (content) => {
-        console.log('change', content);
         const oldProduct = products.find(product => product._id === content._id);
 
         const changedProduct = {

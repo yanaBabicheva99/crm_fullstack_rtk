@@ -17,7 +17,6 @@ export const UserProvider = ({children}) => {
        const getUser = async (id) => {
            try {
                const [data] = await UserService.getUser(id);
-               console.log(data);
                setUser(data);
                setLoading(false);
            } catch(err) {

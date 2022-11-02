@@ -1,23 +1,15 @@
 import React, {useState, useEffect} from 'react';
+import { getData } from '../../../utils/Products';
 
 
 export const usePie = (arrOptions) => {
 
-    const day = String(new Date().getDay());
-    const days = {
-        '1': 'Mon',
-        '2': 'Tue',
-        '3': 'Wed',
-        '4': 'Thu',
-        '5': 'Fri',
-        '6': 'Sat',
-        '0': 'Sun'
-    };
+    const dayNow = getData();
 
     const [soldProducts, setSoldProducts] = useState([]);
 
     useEffect(() => {
-        const soldProductsToday = arrOptions.filter(product => product.day === days[day]);
+        const soldProductsToday = arrOptions.filter(product => product.lastSale === dayNow);
         const data = soldProductsToday.map(product => {
             return {
                 value: product.quantity,
@@ -47,7 +39,7 @@ export const usePie = (arrOptions) => {
             top: '23%',
             orient: 'vertical',
             itemWidth: 10,
-            right: '15%',
+            right: '13%',
             itemGap: 15,
             color: '#2B3844'
         },
