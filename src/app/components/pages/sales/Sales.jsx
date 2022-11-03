@@ -1,18 +1,21 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import SalesTable from "../../table/salesTable/SalesTable";
 import style from "../../../style/title/Title.module.scss";
-import {useProducts} from "../../../hooks/useProducts";
 import {useState} from "react";
 import {useMediaQuery} from "@mui/material";
 import {paginate} from "../../../utils/paginate";
 import Pagination from "../../Pagination";
+import { useGetAllProductsQuery } from '../../../newServices/ProductServices';
+import { useContext } from 'react';
+import { AuthContext } from '../../../context/AuthContext';
 
 
 const Sales = () => {
     const [currentPage, setCurrentPage] = useState(1);
-    const {products, loading} = useProducts();
+    const { userId } = useContext(AuthContext);
+    const { data: products, error, isLoading: loading } = useGetAllProductsQuery(userId);
 
-    const soldProducts = products.length ? products.filter(product => product.quantity): [];
+    const soldProducts = products?.length ? products.filter(product => product.quantity): [];
     const count = soldProducts.length;
 
     const isTablet = useMediaQuery('(max-width:1199px)');

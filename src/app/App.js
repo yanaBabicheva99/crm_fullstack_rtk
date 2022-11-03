@@ -9,6 +9,10 @@ import useAuth from "./hooks/useAuth";
 import {AuthContext} from "./context/AuthContext";
 import {ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { createStore } from './store/store';
+import { Provider } from 'react-redux';
+
+const store = createStore();
 
 function App() {
     const {token, login, logout, userId, signUp, signIn} = useAuth();
@@ -20,11 +24,13 @@ function App() {
                 <AuthContext.Provider value={{
                     token, login, logout, userId, signUp, signIn, isAuthenticated
                 }}>
+                    <Provider store={store}>
                     <UserProvider>
                         <ProductsProvider>
                             {routes}
                         </ProductsProvider>
                     </UserProvider>
+                    </Provider>
                 </AuthContext.Provider>
             </ModalProvider>
             <ToastContainer position="top-center"/>

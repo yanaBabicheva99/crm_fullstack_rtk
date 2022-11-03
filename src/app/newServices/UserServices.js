@@ -5,6 +5,7 @@ export const userAPI = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:5000/api/auth/'
   }),
+  tagTypes: ['User'],
   endpoints: (build) => ({
     signUp: build.mutation({
      query: (content) => ({
@@ -26,29 +27,38 @@ export const userAPI = createApi({
         headers: {
           'authorization': JSON.parse(localStorage.getItem('userData')).token,
           'content-type': 'text/plain',
-        }
-      })
+        },
+      }),
+      providesTags: result => ['User']
     }),
     updateUserInfo: build.mutation({
-      query: (id, content) => ({
-        url: `update/${id}`,
+      query: (data) => ({
+        url: `update/${data.id}`,
         method: 'PATCH',
         headers: {
           'authorization': JSON.parse(localStorage.getItem('userData')).token,
         },
-        body: content
-      })
+        body: data.content
+      }),
+      invalidatesTags: ['User']
     }),
     changeUserInfo: build.mutation({
-      query: (id, content) => ({
-        url: `change/${id}`,
+      query: (data) => ({
+        url: `change/${data.id}`,
         method: 'PUT',
         headers: {
           'authorization': JSON.parse(localStorage.getItem('userData')).token,
         },
-        body: content
-      })
+        body: data.content
+      }),
+      invalidatesTags: ['User']
     }),
-
   })
 })
+export const {
+  useGetUserQuery,
+  useUpdateUserInfoMutation,
+  useChangeUserInfoMutation,
+  useSignInMutation,
+  useSignUpMutation
+} = userAPI;

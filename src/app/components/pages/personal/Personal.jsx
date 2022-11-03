@@ -6,6 +6,9 @@ import InputForm from '../../form/inputForm/InputForm';
 import style from './Personal.module.scss'
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
+import { useGetUserQuery } from '../../../newServices/UserServices';
+import { useContext } from 'react';
+import { AuthContext } from '../../../context/AuthContext';
 
 const PersonalSchema = Yup.object().shape({
   name: Yup.string()
@@ -51,6 +54,9 @@ const PersonalSchema = Yup.object().shape({
 });
 const Personal = () => {
   const { user, loading, updateUserInfo, changeUserInfo } = useUser();
+
+  // const {getUser} = useGetUserQuery();
+  // const {userId} = useContext(AuthContext);
 
   if (loading) {
     return <h2>Loading...</h2>

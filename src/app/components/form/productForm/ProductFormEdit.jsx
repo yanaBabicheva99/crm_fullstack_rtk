@@ -7,6 +7,8 @@ import InputForm from "../inputForm/InputForm";
 import style from "../../modal/Modal.module.scss";
 import styleForm from '../form.module.scss';
 import {useProducts} from "../../../hooks/useProducts";
+import { useChangeProductMutation, useGetAllProductsQuery } from '../../../newServices/ProductServices';
+import { ProductService } from '../../../services/product.service';
 
 const AddProductSchema = Yup.object().shape({
     store: Yup
@@ -62,13 +64,24 @@ const AddProductSchema = Yup.object().shape({
 const ProductFormEdit = ({handleVisible, data}) => {
     const {_id, creationData, ...dataProduct} = data;
 
-    const {changeProduct} = useProducts();
+    const { data: products, error, isLoading: loading } = useGetAllProductsQuery();
+    const [changeProduct, {}] = useChangeProductMutation();
 
     const initialValues = dataProduct;
 
-    const Edit = (data) => {
-        const updateData = {...data, remains: Number(data.remains)}
-        changeProduct({_id, ...updateData});
+
+    const Edit = async (data) => {
+        const updateData = {...data, remains: Number(data.remains)};
+        const content = {_id, ...updateData};
+
+        const oldProduct = products.find(product => product._id === content._id);
+
+        const changedProduct = {
+            ...oldProduct,
+            ...content
+        };
+
+        await changeProduct({id: content._id, content: changedProduct});
         handleVisible();
     };
     return (

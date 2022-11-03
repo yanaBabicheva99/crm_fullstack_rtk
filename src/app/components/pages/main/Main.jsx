@@ -8,17 +8,21 @@ import { Pie } from '../../Charts/Pie/Pie';
 import style from './Main.module.scss'
 import { Bar } from '../../Charts/Bar/Bar';
 import { Line } from '../../Charts/Line/Line';
-import { useProducts } from '../../../hooks/useProducts';
 import { Drawer, useMediaQuery } from '@mui/material';
-import styleTitle from '../../../style/title/Title.module.scss'
+import styleTitle from '../../../style/title/Title.module.scss';
+
+import { useGetAllProductsQuery } from '../../../newServices/ProductServices';
+import { useContext } from 'react';
+import { AuthContext } from '../../../context/AuthContext';
 
 const Main = () => {
 
   const lacationState = useLocation();
   const { visible, setVisible } = useModal();
-  const { products, loading } = useProducts();
+  const { userId } = useContext(AuthContext);
+  const { data: products, error, isLoading: loading } = useGetAllProductsQuery(userId);
 
-  const soldProducts = products.length ? products.filter(product => product.quantity) : [];
+  const soldProducts = products?.length ? products.filter(product => product.quantity) : [];
 
   const { id, remains } = lacationState.state || { id: null, remains: null };
   const isMobile = useMediaQuery('(max-width:599px)');

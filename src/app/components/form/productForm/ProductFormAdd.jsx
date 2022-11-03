@@ -6,7 +6,9 @@ import InputForm from "../inputForm/InputForm";
 
 import style from "../../modal/Modal.module.scss";
 import styleForm from '../form.module.scss';
-import {useProducts} from "../../../hooks/useProducts";
+import { getData } from '../../../utils/Products';
+import { useAddProductMutation } from '../../../newServices/ProductServices';
+
 
 const AddProductSchema = Yup.object().shape({
     store: Yup
@@ -60,7 +62,8 @@ const AddProductSchema = Yup.object().shape({
         )
 });
 const ProductFormAdd = ({handleVisible}) => {
-    const {addProduct} = useProducts();
+    const [addProduct, {}] = useAddProductMutation();
+
     const initialValues = {
         store: '',
         price: '',
@@ -70,9 +73,13 @@ const ProductFormAdd = ({handleVisible}) => {
         weight: ''
     };
 
-    const add = (data,  { resetForm }) => {
-        const updateData = {...data, remains: Number(data.remains)}
-        addProduct(updateData);
+    const add = async (data,  { resetForm }) => {
+        const updateData = {...data, remains: Number(data.remains)};
+        const product = {
+            ...updateData,
+            creationData: getData(),
+        }
+        await addProduct(product);
         handleVisible();
         resetForm();
     };

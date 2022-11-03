@@ -10,10 +10,12 @@ import InputForm from "../inputForm/InputForm";
 
 import style from "../../modal/Modal.module.scss";
 import styleForm from '../form.module.scss';
-import {useProducts} from "../../../hooks/useProducts";
+import { getData } from '../../../utils/Products';
+import { useGetAllProductsQuery, useUpdateProductMutation } from '../../../newServices/ProductServices';
 
 const SellForm = ({handleVisible, quantity, id}) => {
-    const {updateProduct} = useProducts();
+    const { data: products, error, isLoading: loading } = useGetAllProductsQuery();
+    const [updateProduct, {}] = useUpdateProductMutation();
 
     const AddProductSchema = Yup.object().shape({
         quantity: Yup
@@ -61,9 +63,19 @@ const SellForm = ({handleVisible, quantity, id}) => {
         day: days[day]
     };
 
-    const sell = ({quantity, day}) => {
+    const sell = async ({quantity, day}) => {
         const updateQuantity = Number(quantity);
-        updateProduct(id, updateQuantity, day);
+
+        const product = products.find(product => product._id === id);
+        const oldQuantity = Number(product.quantity);
+
+        const updatedProduct = {
+            remains: product.remains - updateQuantity || 0,
+            quantity: oldQuantity +updateQuantity,
+            day,
+            lastSale: getData()
+        };
+        await updateProduct({id, content: updatedProduct})
         handleVisible();
     };
 
