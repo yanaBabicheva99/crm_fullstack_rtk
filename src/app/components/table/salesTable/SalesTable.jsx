@@ -3,15 +3,20 @@ import {getPrice, getWeight} from "../../../utils/Products";
 import TableHeader from "../tableHeader/TableHeader";
 import TableBody from "../tableBody/TableBody";
 import {Link} from "react-router-dom";
-import {useUser} from "../../../hooks/useUser";
 import styleBox from "../Table.module.scss";
+import { useContext } from 'react';
+import { AuthContext } from '../../../context/AuthContext';
+import { useGetUserQuery } from '../../../newServices/UserServices';
 
 const SalesTable = ({sellProducts}) => {
-    const {user, loading} = useUser();
+    const {userId} = useContext(AuthContext);
+    const {data: userData, error, isLoading: loading} = useGetUserQuery(userId);
 
     if (loading) {
         return <h2>Loading...</h2>
     }
+
+    const [user] = userData;
 
     const columns = {
         productName: {

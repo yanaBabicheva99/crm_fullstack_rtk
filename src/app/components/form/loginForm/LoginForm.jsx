@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {Link} from "react-router-dom";
+import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -8,6 +8,8 @@ import InputForm from "../inputForm/InputForm";
 import style from '../../pages/login/Login.module.scss';
 import styleForm from '../form.module.scss';
 import {AuthContext} from "../../../context/AuthContext";
+import { toast } from 'react-toastify';
+import { useSignInMutation } from '../../../newServices/UserServices';
 
 
 
@@ -36,14 +38,19 @@ const SignupSchema = Yup.object().shape({
 
 
 const RegisterForm = () => {
-    const {signIn} = useContext(AuthContext);
+    const {login} = useContext(AuthContext);
+    const [signIn] = useSignInMutation();
+
     const initialValues = {
         email: '',
         password: '',
     };
 
     const handleSubmit = async (content) => {
-        await signIn(content);
+        signIn(content)
+          .unwrap()
+          .then((data) => login(data.token, data.userId))
+          .catch(({data}) => toast.error(data.message))
     };
 
     return (

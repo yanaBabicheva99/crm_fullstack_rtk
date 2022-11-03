@@ -1,12 +1,15 @@
 import React from 'react';
-import { useUser } from '../../../hooks/useUser';
 import { Formik } from 'formik';
 
 import InputForm from '../../form/inputForm/InputForm';
 import style from './Personal.module.scss'
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
-import { useGetUserQuery } from '../../../newServices/UserServices';
+import {
+  useChangeUserInfoMutation,
+  useGetUserQuery,
+  useUpdateUserInfoMutation
+} from '../../../newServices/UserServices';
 import { useContext } from 'react';
 import { AuthContext } from '../../../context/AuthContext';
 
@@ -53,27 +56,33 @@ const PersonalSchema = Yup.object().shape({
     ),
 });
 const Personal = () => {
-  const { user, loading, updateUserInfo, changeUserInfo } = useUser();
-
-  // const {getUser} = useGetUserQuery();
-  // const {userId} = useContext(AuthContext);
+  const {userId} = useContext(AuthContext);
+  const {data: user, error, isLoading: loading} = useGetUserQuery(userId);
+  const [changeUserInfo] = useChangeUserInfoMutation();
+  const [updateUserInfo] = useUpdateUserInfoMutation();
 
   if (loading) {
     return <h2>Loading...</h2>
   }
-
-  const { _id, __v, password, ...data } = user;
+  const [userData] = user;
+  const { _id, __v, password, ...data } = userData;
 
   const initialValues = { oldPassword: '', newPassword: '', ...data };
 
   const handleChange = async (data) => {
     if (data.oldPassword && data.newPassword) {
-      changeUserInfo(_id, data).then(res => toast.info('Personal data updated')).catch(err => toast.error(err));
+      changeUserInfo({id: _id, content: data})
+        .unwrap()
+        .then((data) => toast.info('Personal data updated'))
+        .catch(({data}) => toast.error(data.message))
+
     } else if (!data.oldPassword && data.newPassword || !data.newPassword && data.oldPassword) {
       toast.error('The password and new password fields must be filled');
     } else {
-      updateUserInfo(_id, data);
-      toast.info('Personal data updated');
+      updateUserInfo({id: _id, content: data})
+        .unwrap()
+        .then((data) => toast.info('Personal data updated'))
+        .catch(({data}) => toast.error(data.message))
     }
   };
 

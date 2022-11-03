@@ -10,6 +10,9 @@ import style from '../../pages/login/Login.module.scss';
 import styleForm from '../form.module.scss';
 import {useContext} from "react";
 import {AuthContext} from "../../../context/AuthContext";
+import { UserService } from '../../../services/user.service';
+import { toast } from 'react-toastify';
+import { useSignUpMutation } from '../../../newServices/UserServices';
 
 
 const SignupSchema = Yup.object().shape({
@@ -53,7 +56,8 @@ const SignupSchema = Yup.object().shape({
 
 
 const RegisterForm = () => {
-    const {signUp} = useContext(AuthContext);
+    const [signUp] = useSignUpMutation();
+    const navigate = useNavigate();
 
 
     const initialValues = {
@@ -65,8 +69,12 @@ const RegisterForm = () => {
         repeatPassword: ''
     };
 
+
     const handleSubmit = async (content) => {
-        await signUp(content);
+        signUp(content)
+          .unwrap()
+          .then((data) => navigate('/login'))
+          .catch(({ data }) => toast.error(data.message))
     };
 
     return (

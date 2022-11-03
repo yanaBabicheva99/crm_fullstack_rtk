@@ -29,7 +29,8 @@ export const userAPI = createApi({
           'content-type': 'text/plain',
         },
       }),
-      providesTags: result => ['User']
+      providesTags: (result) =>
+        result ? result.map((id) => ({ type: 'User', id })) : ['User'],
     }),
     updateUserInfo: build.mutation({
       query: (data) => ({
