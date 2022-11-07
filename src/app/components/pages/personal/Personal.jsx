@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Formik } from 'formik';
-
-import InputForm from '../../form/inputForm/InputForm';
-import style from './Personal.module.scss'
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
+
+import InputForm from '../../form/inputForm/InputForm';
+import { AuthContext } from '../../../context/AuthContext';
 import {
   useChangeUserInfoMutation,
   useGetUserQuery,
   useUpdateUserInfoMutation
 } from '../../../newServices/UserServices';
-import { useContext } from 'react';
-import { AuthContext } from '../../../context/AuthContext';
+
+import style from './Personal.module.scss'
 
 const PersonalSchema = Yup.object().shape({
   name: Yup.string()

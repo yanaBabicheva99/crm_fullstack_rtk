@@ -1,7 +1,7 @@
 import React from 'react';
-import style from './LayoutLogin.module.scss';
 import loginImg from '../../assets/img/layout/login.jpg';
-import Login from "../pages/login/Login";
+
+import style from './LayoutLogin.module.scss';
 
 const LayoutLogin = ({children}) => {
     return (

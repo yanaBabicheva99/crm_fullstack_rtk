@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+
 import ProductsTable from '../../table/productsTable/ProductsTable';
 import Modal from '../../modal/Modal';
 import ProductFormEdit from '../../form/productForm/ProductFormEdit';
 import { useModal } from '../../../hooks/useModal';
-import style from '../../../style/title/Title.module.scss';
-import { Drawer, useMediaQuery } from '@mui/material';
 import Pagination from '../../Pagination';
 import { paginate } from '../../../utils/paginate';
-import { useContext } from 'react';
 import { AuthContext } from '../../../context/AuthContext';
 import { useDeleteProductMutation, useGetAllProductsQuery } from '../../../newServices/ProductServices';
 
+import { Drawer, useMediaQuery } from '@mui/material';
+import style from '../../../style/title/Title.module.scss';
 
 const Products = () => {
   const [currentPage, setCurrentPage] = useState(1);

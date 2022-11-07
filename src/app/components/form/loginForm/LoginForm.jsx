@@ -1,15 +1,15 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 
+import InputForm from '../inputForm/InputForm';
+import { AuthContext } from '../../../context/AuthContext';
+import { useSignInMutation } from '../../../newServices/UserServices';
 
-import InputForm from "../inputForm/InputForm";
 import style from '../../pages/login/Login.module.scss';
 import styleForm from '../form.module.scss';
-import {AuthContext} from "../../../context/AuthContext";
-import { toast } from 'react-toastify';
-import { useSignInMutation } from '../../../newServices/UserServices';
 
 
 

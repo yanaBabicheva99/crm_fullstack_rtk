@@ -70,5 +70,6 @@ export const {
   useDeleteProductMutation,
   useAddProductMutation,
   useChangeProductMutation,
-  useUpdateProductMutation
+  useUpdateProductMutation,
+  useLazyGetAllProductsQuery,
 } = productsAPI;

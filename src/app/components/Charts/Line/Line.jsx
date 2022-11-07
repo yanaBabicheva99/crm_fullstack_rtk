@@ -1,19 +1,20 @@
+import React from 'react';
+import ReactECharts from 'echarts-for-react';
 
-import ReactECharts from "echarts-for-react";
-import React from "react";
-import {useLine} from "./useLine";
-import style from "../../pages/main/Main.module.scss";
+import { useLine } from './useLine';
 
-export const Line = ({arrOptions}) => {
-    const {amountSoldProducts, options} = useLine(arrOptions);
+import style from '../../pages/main/Main.module.scss';
 
-    return (
-        <>
-            {amountSoldProducts.length !== 0 && (
-                <div className={style.statistics__day}>
-                    <ReactECharts option={options} />
-                </div>)
-            }
-        </>
-    )
+export const Line = ({ arrOptions }) => {
+  const { amountSoldProducts, options } = useLine(arrOptions);
+
+  return (
+    <>
+      {amountSoldProducts.length !== 0 && (
+        <div className={style.statistics__day}>
+          <ReactECharts option={options}/>
+        </div>)
+      }
+    </>
+  )
 }

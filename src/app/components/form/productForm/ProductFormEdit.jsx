@@ -2,13 +2,11 @@ import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import InputForm from "../inputForm/InputForm";
-
-import style from "../../modal/Modal.module.scss";
-import styleForm from '../form.module.scss';
-import {useProducts} from "../../../hooks/useProducts";
+import InputForm from '../inputForm/InputForm';
 import { useChangeProductMutation, useGetAllProductsQuery } from '../../../newServices/ProductServices';
-import { ProductService } from '../../../services/product.service';
+
+import style from '../../modal/Modal.module.scss';
+import styleForm from '../form.module.scss';
 
 const AddProductSchema = Yup.object().shape({
     store: Yup
@@ -64,7 +62,14 @@ const AddProductSchema = Yup.object().shape({
 const ProductFormEdit = ({handleVisible, data}) => {
     const {_id, creationData, ...dataProduct} = data;
 
-    const { data: products, error, isLoading: loading } = useGetAllProductsQuery();
+    const { data: oldProduct, error, isLoading } = useGetAllProductsQuery(undefined, {
+        selectFromResult: ({ data, error, isLoading }) => ({
+            data: data?.find((item) =>  item._id === _id),
+            error,
+            isLoading
+        }),
+    });
+
     const [changeProduct, {}] = useChangeProductMutation();
 
     const initialValues = dataProduct;
@@ -74,11 +79,11 @@ const ProductFormEdit = ({handleVisible, data}) => {
         const updateData = {...data, remains: Number(data.remains)};
         const content = {_id, ...updateData};
 
-        const oldProduct = products.find(product => product._id === content._id);
+        const {_id:productId, ...product } = oldProduct;
 
         const changedProduct = {
-            ...oldProduct,
-            ...content
+            ...product,
+            ...updateData
         };
 
         await changeProduct({id: content._id, content: changedProduct});

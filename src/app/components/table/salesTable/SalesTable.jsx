@@ -1,12 +1,13 @@
-import React from 'react';
-import {getPrice, getWeight} from "../../../utils/Products";
-import TableHeader from "../tableHeader/TableHeader";
-import TableBody from "../tableBody/TableBody";
-import {Link} from "react-router-dom";
-import styleBox from "../Table.module.scss";
-import { useContext } from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+
+import TableHeader from '../tableHeader/TableHeader';
+import TableBody from '../tableBody/TableBody';
+import { getPrice, getWeight } from '../../../utils/Products';
 import { AuthContext } from '../../../context/AuthContext';
 import { useGetUserQuery } from '../../../newServices/UserServices';
+
+import styleBox from '../Table.module.scss';
 
 const SalesTable = ({sellProducts}) => {
     const {userId} = useContext(AuthContext);

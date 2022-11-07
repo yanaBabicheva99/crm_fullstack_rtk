@@ -1,4 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
+
 const storageName = 'userData';
 
 const useAuth = () => {

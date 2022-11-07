@@ -1,14 +1,13 @@
-import React from 'react';
-import SalesTable from "../../table/salesTable/SalesTable";
-import style from "../../../style/title/Title.module.scss";
-import {useState} from "react";
-import {useMediaQuery} from "@mui/material";
-import {paginate} from "../../../utils/paginate";
-import Pagination from "../../Pagination";
+import React, { useContext, useState } from 'react';
+
+import SalesTable from '../../table/salesTable/SalesTable';
+import { paginate } from '../../../utils/paginate';
+import Pagination from '../../Pagination';
 import { useGetAllProductsQuery } from '../../../newServices/ProductServices';
-import { useContext } from 'react';
 import { AuthContext } from '../../../context/AuthContext';
 
+import style from '../../../style/title/Title.module.scss';
+import { useMediaQuery } from '@mui/material';
 
 const Sales = () => {
     const [currentPage, setCurrentPage] = useState(1);

@@ -1,5 +1,7 @@
 import React from 'react';
+
 import style from './InputForm.module.scss';
+
 const InputForm = (
     {
         label,

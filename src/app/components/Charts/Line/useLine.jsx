@@ -1,6 +1,6 @@
-import {useEffect, useState} from "react";
-import { getData } from '../../../utils/Products';
+import { useEffect, useState } from 'react';
 
+import { getData } from '../../../utils/Products';
 
 export const useLine = (arrOptions) => {
 

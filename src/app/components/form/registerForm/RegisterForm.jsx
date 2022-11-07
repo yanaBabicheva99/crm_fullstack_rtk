@@ -1,18 +1,14 @@
 import React from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-
+import { toast } from 'react-toastify';
 
 import InputForm from '../inputForm/InputForm';
+import { useSignUpMutation } from '../../../newServices/UserServices';
 
 import style from '../../pages/login/Login.module.scss';
 import styleForm from '../form.module.scss';
-import {useContext} from "react";
-import {AuthContext} from "../../../context/AuthContext";
-import { UserService } from '../../../services/user.service';
-import { toast } from 'react-toastify';
-import { useSignUpMutation } from '../../../newServices/UserServices';
 
 
 const SignupSchema = Yup.object().shape({

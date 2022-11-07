@@ -1,5 +1,6 @@
+import React from 'react';
+
 import style from './Burger.module.scss'
-import React from "react";
 
 const Burger = ({open, onClick}) => {
     return (

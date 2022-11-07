@@ -1,13 +1,14 @@
-import React from 'react';
-import {getPrice, getWeight} from "../../../utils/Products";
-import Actions from "../../actions/Actions";
-import TableHeader from "../tableHeader/TableHeader";
-import TableBody from "../tableBody/TableBody";
-import {Link} from "react-router-dom";
-import styleBox from '../Table.module.scss';
-import { useContext } from 'react';
+import React, { useContext }  from 'react';
+import { Link } from 'react-router-dom';
+
+import Actions from '../../actions/Actions';
+import TableHeader from '../tableHeader/TableHeader';
+import TableBody from '../tableBody/TableBody';
 import { AuthContext } from '../../../context/AuthContext';
 import { useGetUserQuery } from '../../../newServices/UserServices';
+import { getPrice, getWeight } from '../../../utils/Products';
+
+import styleBox from '../Table.module.scss';
 
 const ProductsTable = ({products, handleDelete, onCurrentProduct, onVisibleEdit}) => {
 

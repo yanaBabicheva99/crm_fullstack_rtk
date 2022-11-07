@@ -25,11 +25,11 @@ function App() {
                     token, login, logout, userId, signUp, signIn, isAuthenticated
                 }}>
                     <Provider store={store}>
-                    <UserProvider>
-                        <ProductsProvider>
+                    {/*<UserProvider>*/}
+                    {/*    <ProductsProvider>*/}
                             {routes}
-                        </ProductsProvider>
-                    </UserProvider>
+                    {/*    </ProductsProvider>*/}
+                    {/*</UserProvider>*/}
                     </Provider>
                 </AuthContext.Provider>
             </ModalProvider>

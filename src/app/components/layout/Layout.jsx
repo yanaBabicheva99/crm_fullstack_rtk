@@ -1,15 +1,15 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
-import Menu from "../menu/Menu";
-import Modal from "../modal/Modal";
-import ProductFormAdd from "../form/productForm/ProductFormAdd";
-import {ReactComponent as IconBtn} from '../../assets/img/layout/btn.svg';
+import Menu from '../menu/Menu';
+import Modal from '../modal/Modal';
+import ProductFormAdd from '../form/productForm/ProductFormAdd';
+import { ReactComponent as IconBtn } from '../../assets/img/layout/btn.svg';
+import { useModal } from '../../hooks/useModal';
+import Burger from '../Burger';
 
 
 import style from './Layout.module.scss';
-import {useModal} from "../../hooks/useModal";
-import Burger from "../Burger";
-import {useMediaQuery, Drawer} from "@mui/material";
+import { useMediaQuery, Drawer } from '@mui/material';
 
 
 const Layout = ({children, title, subtitle}) => {

@@ -2,13 +2,12 @@ import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import InputForm from "../inputForm/InputForm";
-
-import style from "../../modal/Modal.module.scss";
-import styleForm from '../form.module.scss';
+import InputForm from '../inputForm/InputForm';
 import { getData } from '../../../utils/Products';
 import { useAddProductMutation } from '../../../newServices/ProductServices';
 
+import style from '../../modal/Modal.module.scss';
+import styleForm from '../form.module.scss';
 
 const AddProductSchema = Yup.object().shape({
     store: Yup

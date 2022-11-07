@@ -1,25 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
+
+import { useGetAllProductsQuery } from '../../../newServices/ProductServices';
+import { AuthContext } from '../../../context/AuthContext';
 import SellForm from '../../form/productForm/SellForm';
 import Modal from '../../modal/Modal';
 import { useModal } from '../../../hooks/useModal';
 import { Pie } from '../../Charts/Pie/Pie';
-
-import style from './Main.module.scss'
 import { Bar } from '../../Charts/Bar/Bar';
 import { Line } from '../../Charts/Line/Line';
+
+import style from './Main.module.scss'
 import { Drawer, useMediaQuery } from '@mui/material';
 import styleTitle from '../../../style/title/Title.module.scss';
-
-import { useGetAllProductsQuery } from '../../../newServices/ProductServices';
-import { useContext } from 'react';
-import { AuthContext } from '../../../context/AuthContext';
 
 const Main = () => {
 
   const lacationState = useLocation();
   const { visible, setVisible } = useModal();
   const { userId } = useContext(AuthContext);
+
   const { data: products, error, isLoading: loading } = useGetAllProductsQuery(userId);
 
   const soldProducts = products?.length ? products.filter(product => product.quantity) : [];

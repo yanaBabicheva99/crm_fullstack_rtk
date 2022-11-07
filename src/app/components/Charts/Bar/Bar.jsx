@@ -1,5 +1,6 @@
-import ReactECharts from 'echarts-for-react';
 import React from "react";
+import ReactECharts from 'echarts-for-react';
+
 import {useBar} from "./useBar";
 
 

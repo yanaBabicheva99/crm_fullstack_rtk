@@ -46,6 +46,14 @@ const productSchema = new Schema({
         type: Number,
         default: 0
     },
+    lastSalePrice: {
+        type: String,
+        default: ''
+    },
+    revenue: {
+        type: Number,
+        default: 0
+    },
     delete: {
         type: Boolean,
         default: false

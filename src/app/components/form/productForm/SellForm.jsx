@@ -1,20 +1,27 @@
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+
+import InputForm from '../inputForm/InputForm';
+import { getData } from '../../../utils/Products';
+import { useGetAllProductsQuery, useUpdateProductMutation } from '../../../newServices/ProductServices';
+
+import style from '../../modal/Modal.module.scss';
+import styleForm from '../form.module.scss';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-import InputForm from "../inputForm/InputForm";
-
-import style from "../../modal/Modal.module.scss";
-import styleForm from '../form.module.scss';
-import { getData } from '../../../utils/Products';
-import { useGetAllProductsQuery, useUpdateProductMutation } from '../../../newServices/ProductServices';
-
 const SellForm = ({handleVisible, quantity, id}) => {
-    const { data: products, error, isLoading: loading } = useGetAllProductsQuery();
+
+    const { data: oldProduct, error, isLoading } = useGetAllProductsQuery(undefined, {
+        selectFromResult: ({ data, error, isLoading }) => ({
+            data: data?.find((item) =>  item._id === id),
+            error,
+            isLoading
+        }),
+    });
     const [updateProduct, {}] = useUpdateProductMutation();
 
     const AddProductSchema = Yup.object().shape({
@@ -66,14 +73,16 @@ const SellForm = ({handleVisible, quantity, id}) => {
     const sell = async ({quantity, day}) => {
         const updateQuantity = Number(quantity);
 
-        const product = products.find(product => product._id === id);
-        const oldQuantity = Number(product.quantity);
+        const product = oldProduct;
+        const updatePrice = Number(product.price);
 
         const updatedProduct = {
             remains: product.remains - updateQuantity || 0,
-            quantity: oldQuantity +updateQuantity,
+            quantity: product.quantity + updateQuantity,
             day,
-            lastSale: getData()
+            lastSale: getData(),
+            lastSalePrice: product.price,
+            revenue: product.revenue + updatePrice * updateQuantity
         };
         await updateProduct({id, content: updatedProduct})
         handleVisible();

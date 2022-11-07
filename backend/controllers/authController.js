@@ -67,7 +67,6 @@ module.exports.getUser = async function(req, res) {
         const user = await User.find({
             _id:req.params.id
         });
-        console.log(user);
         res.status(200).json(user);
     } catch(err) {
         errorHandler(res, err);

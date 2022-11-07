@@ -1,8 +1,9 @@
-
+import React from 'react';
 import ReactECharts from 'echarts-for-react';
-import React from "react";
-import {usePie} from "./usePie";
-import style from "../../pages/main/Main.module.scss";
+
+import { usePie } from './usePie';
+
+import style from '../../pages/main/Main.module.scss';
 
 export const Pie = ({arrOptions}) => {
      const {soldProducts, options} = usePie(arrOptions);

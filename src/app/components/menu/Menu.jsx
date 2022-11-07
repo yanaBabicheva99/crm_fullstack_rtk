@@ -1,17 +1,18 @@
-import React, {useContext, useState} from 'react';
-import {NavLink, useNavigate} from "react-router-dom";
+import React, { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 
-import {Routes} from "../../constants";
-import {ReactComponent as IconHome } from "../../assets/img/menu/home.svg";
-import {ReactComponent as IconProduct} from "../../assets/img/menu/product.svg";
-import {ReactComponent as IconUser} from "../../assets/img/menu/user.svg";
-import {ReactComponent as IconSales} from "../../assets/img/menu/sales.svg";
-import {ReactComponent as IconLogo} from "../../assets/img/menu/log.svg";
+import { Routes } from '../../constants';
+import { AuthContext } from '../../context/AuthContext';
+import { ReactComponent as IconHome } from '../../assets/img/menu/home.svg';
+import { ReactComponent as IconProduct } from '../../assets/img/menu/product.svg';
+import { ReactComponent as IconUser } from '../../assets/img/menu/user.svg';
+import { ReactComponent as IconSales } from '../../assets/img/menu/sales.svg';
+import { ReactComponent as IconLogo } from '../../assets/img/menu/log.svg';
 import logoJustice from '../../assets/img/menu/justice.png';
 import logoCrm from '../../assets/img/menu/crm.svg';
 
 import style from './Menu.module.scss';
-import {AuthContext} from "../../context/AuthContext";
+
 
 
 
