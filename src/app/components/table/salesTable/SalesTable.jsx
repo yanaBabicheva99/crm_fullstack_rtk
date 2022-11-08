@@ -5,7 +5,7 @@ import TableHeader from '../tableHeader/TableHeader';
 import TableBody from '../tableBody/TableBody';
 import { getPrice, getWeight } from '../../../utils/Products';
 import { AuthContext } from '../../../context/AuthContext';
-import { useGetUserQuery } from '../../../newServices/UserServices';
+import { useGetUserQuery } from '../../../service/UserServices';
 
 import styleBox from '../Table.module.scss';
 

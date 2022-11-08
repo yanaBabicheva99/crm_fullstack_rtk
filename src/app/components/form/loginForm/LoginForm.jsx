@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 
 import InputForm from '../inputForm/InputForm';
 import { AuthContext } from '../../../context/AuthContext';
-import { useSignInMutation } from '../../../newServices/UserServices';
+import { useSignInMutation } from '../../../service/UserServices';
 
 import style from '../../pages/login/Login.module.scss';
 import styleForm from '../form.module.scss';

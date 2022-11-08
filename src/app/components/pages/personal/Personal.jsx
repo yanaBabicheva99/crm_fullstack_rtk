@@ -9,7 +9,7 @@ import {
   useChangeUserInfoMutation,
   useGetUserQuery,
   useUpdateUserInfoMutation
-} from '../../../newServices/UserServices';
+} from '../../../service/UserServices';
 
 import style from './Personal.module.scss'
 

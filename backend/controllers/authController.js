@@ -118,7 +118,7 @@ module.exports.changeUser = async function(req, res) {
 
         else {
             res.status(401).json({
-                message: 'Пароли не совпадают. Попробуйте снова'
+                message: 'Passwords don\'t match, try again'
             })
         }
     } catch(err) {

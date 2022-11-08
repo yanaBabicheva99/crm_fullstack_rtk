@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 
 import InputForm from '../inputForm/InputForm';
 import { getData } from '../../../utils/Products';
-import { useAddProductMutation } from '../../../newServices/ProductServices';
+import { useAddProductMutation } from '../../../service/ProductServices';
 
 import style from '../../modal/Modal.module.scss';
 import styleForm from '../form.module.scss';

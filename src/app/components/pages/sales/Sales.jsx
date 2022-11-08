@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import SalesTable from '../../table/salesTable/SalesTable';
 import { paginate } from '../../../utils/paginate';
 import Pagination from '../../Pagination';
-import { useGetAllProductsQuery } from '../../../newServices/ProductServices';
+import { useGetAllProductsQuery } from '../../../service/ProductServices';
 import { AuthContext } from '../../../context/AuthContext';
 
 import style from '../../../style/title/Title.module.scss';

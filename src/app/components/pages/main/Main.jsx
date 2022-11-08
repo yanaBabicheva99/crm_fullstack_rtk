@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { useGetAllProductsQuery } from '../../../newServices/ProductServices';
+import { useGetAllProductsQuery } from '../../../service/ProductServices';
 import { AuthContext } from '../../../context/AuthContext';
 import SellForm from '../../form/productForm/SellForm';
 import Modal from '../../modal/Modal';

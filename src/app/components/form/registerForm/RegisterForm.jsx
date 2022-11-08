@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 
 import InputForm from '../inputForm/InputForm';
-import { useSignUpMutation } from '../../../newServices/UserServices';
+import { useSignUpMutation } from '../../../service/UserServices';
 
 import style from '../../pages/login/Login.module.scss';
 import styleForm from '../form.module.scss';

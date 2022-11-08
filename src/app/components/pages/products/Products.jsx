@@ -7,7 +7,7 @@ import { useModal } from '../../../hooks/useModal';
 import Pagination from '../../Pagination';
 import { paginate } from '../../../utils/paginate';
 import { AuthContext } from '../../../context/AuthContext';
-import { useDeleteProductMutation, useGetAllProductsQuery } from '../../../newServices/ProductServices';
+import { useDeleteProductMutation, useGetAllProductsQuery } from '../../../service/ProductServices';
 
 import { Drawer, useMediaQuery } from '@mui/material';
 import style from '../../../style/title/Title.module.scss';

@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import InputForm from '../inputForm/InputForm';
-import { useChangeProductMutation, useGetAllProductsQuery } from '../../../newServices/ProductServices';
+import { useChangeProductMutation, useGetAllProductsQuery } from '../../../service/ProductServices';
 
 import style from '../../modal/Modal.module.scss';
 import styleForm from '../form.module.scss';

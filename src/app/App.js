@@ -1,16 +1,15 @@
 import React from 'react';
-
-import {useRoutes} from "./routes";
-import './style/index.module.scss';
-import {ProductsProvider} from "./hooks/useProducts";
-import {ModalProvider} from "./hooks/useModal";
-import UserProvider from "./hooks/useUser";
-import useAuth from "./hooks/useAuth";
-import {AuthContext} from "./context/AuthContext";
-import {ToastContainer} from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { createStore } from './store/store';
 import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+
+import { useRoutes } from './routes';
+import { ModalProvider } from './hooks/useModal';
+import { AuthContext } from './context/AuthContext';
+import { createStore } from './store/store';
+import useAuth from './hooks/useAuth';
+
+import './style/index.module.scss';
+import 'react-toastify/dist/ReactToastify.css';
 
 const store = createStore();
 
@@ -25,11 +24,7 @@ function App() {
                     token, login, logout, userId, signUp, signIn, isAuthenticated
                 }}>
                     <Provider store={store}>
-                    {/*<UserProvider>*/}
-                    {/*    <ProductsProvider>*/}
                             {routes}
-                    {/*    </ProductsProvider>*/}
-                    {/*</UserProvider>*/}
                     </Provider>
                 </AuthContext.Provider>
             </ModalProvider>
